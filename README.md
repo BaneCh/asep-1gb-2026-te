@@ -96,19 +96,6 @@ The site is hosted on **Vercel** (project Root Directory: `web`). Every push to 
 [asep-1gb-2026-te.vercel.app](https://asep-1gb-2026-te.vercel.app) automatically; pushes to other
 branches get a private preview link.
 
-To preview changes locally before pushing:
-
-```powershell
-cd web
-npm install        # first time only
-npm run dev        # http://localhost:3000
-```
-
-Site-wide settings — author name and links, contact for removal requests, official sources —
-are in [`web/lib/site.ts`](web/lib/site.ts); the default light/dark theme is in
-[`web/lib/theme.ts`](web/lib/theme.ts) and the colours in [`web/app/globals.css`](web/app/globals.css).
-Two optional environment variables can override settings on Vercel: `NEXT_PUBLIC_SITE_URL`
-(only needed for a custom domain) and `NEXT_PUBLIC_CONTACT_URL`.
 
 ## Known limitations
 
