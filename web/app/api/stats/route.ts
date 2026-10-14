@@ -67,7 +67,26 @@ export async function GET() {
       })),
   };
 
+  // Βάση (χαμηλότερη βαθμολογία διοριστέου) ανά ειδικότητα — όλες, από την υψηλότερη
+  const nameBySlug: Record<string, string> = Object.fromEntries(
+    (index as { slug: string; eidikotita: string }[]).map((e) => [e.slug, e.eidikotita])
+  );
+  const vaseis = Object.entries(eidStats as Record<string, { vasi: number | null; dioristoi: number }>)
+    .map(([slug, s]) => ({
+      slug,
+      name: nameBySlug[slug] || slug,
+      vasi: s.vasi,
+      dioristoi: s.dioristoi,
+    }))
+    .filter((e): e is typeof e & { vasi: number } => e.vasi != null)
+    .sort((a, b) => b.vasi - a.vasi);
+
+  // Καλυμμένες / αδιάθετες θέσεις (ανά ειδικότητα ΦΕΚ και περιφερειακή ενότητα)
+  const theseis = getJson("theseis_stats.json");
+
   return NextResponse.json({
+    vaseis,
+    theseis,
     global: globalStats,
     topByCount,
     topByDioristoi,

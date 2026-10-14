@@ -11,6 +11,7 @@
 «Διοριστέος» μετράται μόνο η εγγραφή με dioristike = true (μία ανά άτομο).
 """
 
+import re
 import sys
 import json
 import shutil
@@ -27,8 +28,20 @@ CHUNK_SIZE = 1000
 
 # Generated αρχεία που ξαναγράφονται σε κάθε εκτέλεση (τα geo/positions όχι)
 GENERATED_FILES = ["search_index.json", "chunk_index.json", "eidikotites_stats.json",
-                   "global_stats.json", "eidikotites_index.json"]
+                   "global_stats.json", "eidikotites_index.json", "theseis_stats.json"]
 GENERATED_DIRS = ["chunks", "eidikotites"]
+
+
+def specialty_label(eidikotita: str) -> str:
+    """Ενιαίο όνομα ειδικότητας ΦΕΚ — ίδιο με το specialtyLabel() του χάρτη
+    (web/app/xartis/page.tsx): ενώνει τις παραλλαγές «(ΙΔΑΧ)*», «Ή»/«ή»,
+    «ΔΙΟΙΚΗΤΙΚΟΥ- ΛΟΓΙΣΤΙΚΟΥ» και κάνει το «ΤΕ Χ ΕΙΔ. ΤΕ Χ» απλώς «ΤΕ Χ»."""
+    s = re.sub(r"\(ΙΔΑΧ\)\*?", "", eidikotita or "")
+    s = s.replace("Ή", "ή")
+    s = re.sub(r"-\s+", "-", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    m = re.fullmatch(r"(.+?) ΕΙΔ\. (.+)", s)
+    return m.group(1) if m and m.group(1) == m.group(2) else s
 
 
 def has_entopiotita(r: dict) -> bool:
@@ -93,10 +106,14 @@ def main():
         vaths = [r["vathmologia"] for r in records if r.get("vathmologia") is not None]
         unique = {r["am"] for r in records}
         dioristoi = sum(1 for r in records if r.get("dioristike"))
+        # «Βάση»: η χαμηλότερη βαθμολογία με την οποία έγινε διορισμός μέσω του πίνακα
+        dior_vaths = [r["vathmologia"] for r in records
+                      if r.get("dioristike") and r.get("vathmologia") is not None]
         eid_stats[slug] = {
             "count": len(records),
             "unique_candidates": len(unique),
             "dioristoi": dioristoi,
+            "vasi": min(dior_vaths) if dior_vaths else None,
             "pososto": round(dioristoi / len(unique) * 100, 1) if unique else 0,
             "min_vath": min(vaths) if vaths else None,
             "max_vath": max(vaths) if vaths else None,
@@ -132,6 +149,41 @@ def main():
     (WEB_DATA / "global_stats.json").write_text(
         json.dumps(global_stats, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"  ✓ global_stats.json {global_stats}")
+
+    # ============ 4β. ΚΑΛΥΜΜΕΝΕΣ / ΑΔΙΑΘΕΤΕΣ ΘΕΣΕΙΣ ============
+    # Καλυμμένες θέσεις κωδικού = διοριστέοι με αυτή τη θέση διορισμού.
+    print("\nΔημιουργία στατιστικών θέσεων (αδιάθετες)...")
+    filled_by_kod = defaultdict(int)
+    for r in all_data:
+        if r.get("dioristike"):
+            filled_by_kod[r["thesi_diorismou"]] += 1
+
+    def bucket(key_fn):
+        acc = defaultdict(lambda: {"theseis": 0, "filled": 0, "kodikoi": 0, "kodikoi_adiathetoi": 0})
+        for p in positions:
+            b = acc[key_fn(p)]
+            filled = min(filled_by_kod.get(p["kod_thesis"], 0), p["theseis"])
+            b["theseis"] += p["theseis"]
+            b["filled"] += filled
+            b["kodikoi"] += 1
+            b["kodikoi_adiathetoi"] += 1 if filled < p["theseis"] else 0
+        rows = [{"name": k, **v, "adiathetes": v["theseis"] - v["filled"]} for k, v in acc.items()]
+        return sorted(rows, key=lambda x: (-x["adiathetes"], x["name"]))
+
+    total_filled = sum(min(filled_by_kod.get(p["kod_thesis"], 0), p["theseis"]) for p in positions)
+    theseis_stats = {
+        "total_theseis": global_stats["total_theseis"],
+        "filled": total_filled,
+        "adiathetes": global_stats["total_theseis"] - total_filled,
+        "kodikoi_adiathetoi": sum(1 for p in positions
+                                  if filled_by_kod.get(p["kod_thesis"], 0) < p["theseis"]),
+        "by_eidikotita": bucket(lambda p: specialty_label(p["eidikotita"])),
+        "by_perifereia": bucket(lambda p: p["perifereia"]),
+    }
+    (WEB_DATA / "theseis_stats.json").write_text(
+        json.dumps(theseis_stats, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"  ✓ theseis_stats.json: {theseis_stats['adiathetes']} αδιάθετες από "
+          f"{theseis_stats['total_theseis']} θέσεις")
 
     # ============ 5. EIDIKOTITES INDEX ============
     # count = μοναδικοί υποψήφιοι του πίνακα (όχι εγγραφές ανά ομάδα προσόντων)

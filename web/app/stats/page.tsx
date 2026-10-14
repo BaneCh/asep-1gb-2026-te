@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
 import { formatNumber, formatVathmologia } from "@/lib/utils";
+import { VaseisCard, AdiathetesCard, type VasiRow, type TheseisStats } from "@/components/stats/ExtraStats";
 import {
   BarChart,
   Bar,
@@ -18,6 +19,8 @@ import {
 } from "recharts";
 
 interface StatsData {
+  vaseis: VasiRow[];
+  theseis: TheseisStats;
   global: {
     total_candidates: number;
     total_dioristoi: number;
@@ -465,6 +468,12 @@ export default function StatsPage() {
             </div>
           </motion.div>
         </div>
+
+        {/* Βάσεις ανά ειδικότητα */}
+        <VaseisCard rows={data.vaseis} />
+
+        {/* Αδιάθετες θέσεις */}
+        <AdiathetesCard data={data.theseis} />
 
         {/* Κατανομή Τίτλων Σπουδών (Mobile-Friendly Donut) */}
         <motion.div

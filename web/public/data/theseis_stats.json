@@ -1,0 +1,930 @@
+{
+  "total_theseis": 2628,
+  "filled": 2407,
+  "adiathetes": 221,
+  "kodikoi_adiathetoi": 178,
+  "by_eidikotita": [
+    {
+      "name": "ΤΕ ΚΟΙΝΩΝΙΚΗΣ ΕΡΓΑΣΙΑΣ ΕΙΔ. ΤΕ ΚΟΙΝΩΝΙΚΩΝ ΛΕΙΤΟΥΡΓΩΝ",
+      "theseis": 161,
+      "filled": 115,
+      "kodikoi": 119,
+      "kodikoi_adiathetoi": 39,
+      "adiathetes": 46
+    },
+    {
+      "name": "ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΗΛΕΚΤΡΟΛΟΓΩΝ ΜΗΧΑΝΙΚΩΝ",
+      "theseis": 200,
+      "filled": 160,
+      "kodikoi": 153,
+      "kodikoi_adiathetoi": 32,
+      "adiathetes": 40
+    },
+    {
+      "name": "ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΜΗΧΑΝΟΛΟΓΩΝ ΜΗΧΑΝΙΚΩΝ",
+      "theseis": 229,
+      "filled": 200,
+      "kodikoi": 148,
+      "kodikoi_adiathetoi": 21,
+      "adiathetes": 29
+    },
+    {
+      "name": "ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΤΟΠΟΓΡΑΦΩΝ ΜΗΧΑΝΙΚΩΝ",
+      "theseis": 156,
+      "filled": 127,
+      "kodikoi": 122,
+      "kodikoi_adiathetoi": 25,
+      "adiathetes": 29
+    },
+    {
+      "name": "ΤΕ ΕΠΟΠΤΩΝ ΔΗΜΟΣΙΑΣ ΥΓΕΙΑΣ",
+      "theseis": 116,
+      "filled": 90,
+      "kodikoi": 54,
+      "kodikoi_adiathetoi": 19,
+      "adiathetes": 26
+    },
+    {
+      "name": "ΤΕ ΕΡΓΟΘΕΡΑΠΕΙΑΣ",
+      "theseis": 32,
+      "filled": 7,
+      "kodikoi": 24,
+      "kodikoi_adiathetoi": 19,
+      "adiathetes": 25
+    },
+    {
+      "name": "ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΜΗΧΑΝΙΚΩΝ ΟΧΗΜΑΤΩΝ",
+      "theseis": 22,
+      "filled": 14,
+      "kodikoi": 17,
+      "kodikoi_adiathetoi": 7,
+      "adiathetes": 8
+    },
+    {
+      "name": "ΤΕ ΕΠΙΣΚΕΠΤΩΝ ΥΓΕΙΑΣ",
+      "theseis": 17,
+      "filled": 11,
+      "kodikoi": 15,
+      "kodikoi_adiathetoi": 5,
+      "adiathetes": 6
+    },
+    {
+      "name": "ΤΕ ΕΠΙΜΕΛΗΤΩΝ ΚΟΙΝΩΝΙΚΗΣ ΑΡΩΓΗΣ",
+      "theseis": 9,
+      "filled": 5,
+      "kodikoi": 9,
+      "kodikoi_adiathetoi": 4,
+      "adiathetes": 4
+    },
+    {
+      "name": "ΤΕ ΠΛΗΡΟΦΟΡΙΚΗΣ ΕΙΔ. ΤΕ ΠΛΗΡΟΦΟΡΙΚΗΣ (SOFTWARE ή HARDWARE)",
+      "theseis": 439,
+      "filled": 436,
+      "kodikoi": 291,
+      "kodikoi_adiathetoi": 2,
+      "adiathetes": 3
+    },
+    {
+      "name": "ΤΕ ΦΥΣΙΚΟΘΕΡΑΠΕΙΑΣ",
+      "theseis": 47,
+      "filled": 44,
+      "kodikoi": 38,
+      "kodikoi_adiathetoi": 3,
+      "adiathetes": 3
+    },
+    {
+      "name": "ΤΕ ΕΠΙΜΕΛΗΤΩΝ ΑΝΗΛΙΚΩΝ",
+      "theseis": 5,
+      "filled": 4,
+      "kodikoi": 5,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΑΥΤΟΜΑΤΙΣΜΟΥ",
+      "theseis": 8,
+      "filled": 7,
+      "kodikoi": 8,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΤΕ ΒΙΒΛΙΟΘΗΚΟΝΟΜΙΑΣ",
+      "theseis": 22,
+      "filled": 22,
+      "kodikoi": 22,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΒΙΟΪΑΤΡΙΚΩΝ ΕΠΙΣΤΗΜΩΝ ΕΙΔ. ΤΕ ΙΑΤΡΙΚΩΝ ΕΡΓΑΣΤΗΡΙΩΝ",
+      "theseis": 29,
+      "filled": 29,
+      "kodikoi": 6,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΔΗΜΟΣΙΟΝΟΜΙΚΩΝ",
+      "theseis": 7,
+      "filled": 7,
+      "kodikoi": 4,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΔΙΑΙΤΟΛΟΓΙΑΣ",
+      "theseis": 1,
+      "filled": 1,
+      "kodikoi": 1,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΔΙΕΚΠΕΡΑΙΩΣΗΣ ΥΠΟΘΕΣΕΩΝ ΠΟΛΙΤΩΝ",
+      "theseis": 4,
+      "filled": 4,
+      "kodikoi": 4,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΔΙΟΙΚΗΤΙΚΟΥ-ΛΟΓΙΣΤΙΚΟΥ",
+      "theseis": 441,
+      "filled": 441,
+      "kodikoi": 276,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΔΙΟΙΚΗΤΙΚΟΥ-ΛΟΓΙΣΤΙΚΟΥ ΕΙΔ. ΤΕ ΔΙΟΙΚΗΣΗΣ ΜΟΝΑΔΩΝ ΤΟΠΙΚΗΣ ΑΥΤΟΔΙΟΙΚΗΣΗΣ",
+      "theseis": 57,
+      "filled": 57,
+      "kodikoi": 47,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΔΙΟΙΚΗΤΙΚΟΥ-ΛΟΓΙΣΤΙΚΟΥ ΕΙΔ. ΤΕ ΔΙΟΙΚΗΣΗΣ ΜΟΝΑΔΩΝ ΥΓΕΙΑΣ ΚΑΙ ΠΡΟΝΟΙΑΣ",
+      "theseis": 4,
+      "filled": 4,
+      "kodikoi": 4,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΔΙΟΙΚΗΤΙΚΟΥ-ΛΟΓΙΣΤΙΚΟΥ ΕΙΔ. ΤΕ ΔΙΟΙΚΗΣΗΣ ΤΟΥΡΙΣΜΟΥ",
+      "theseis": 12,
+      "filled": 12,
+      "kodikoi": 10,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΔΙΟΙΚΗΤΙΚΟΥ-ΛΟΓΙΣΤΙΚΟΥ ΕΙΔ. ΤΕ ΛΟΓΙΣΤΙΚΟΥ",
+      "theseis": 37,
+      "filled": 37,
+      "kodikoi": 32,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΕΠΙΚΟΙΝΩΝΙΑΣ ΚΑΙ ΔΗΜΟΣΙΩΝ ΣΧΕΣΕΩΝ",
+      "theseis": 1,
+      "filled": 1,
+      "kodikoi": 1,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΕΦΟΡΙΑΚΩΝ",
+      "theseis": 32,
+      "filled": 32,
+      "kodikoi": 24,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΛΟΓΟΘΕΡΑΠΕΙΑΣ",
+      "theseis": 6,
+      "filled": 6,
+      "kodikoi": 5,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΗΛΕΚΤΡΟΛΟΓΩΝ ΜΗΧΑΝΙΚΩΝ ή ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΜΗΧΑΝΟΛΟΓΩΝ ΜΗΧΑΝΙΚΩΝ",
+      "theseis": 6,
+      "filled": 6,
+      "kodikoi": 4,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΗΛΕΚΤΡΟΛΟΓΩΝ ΜΗΧΑΝΙΚΩΝ ή ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΜΗΧΑΝΟΛΟΓΩΝ ΜΗΧΑΝΙΚΩΝ ή ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΠΟΛΙΤΙΚΩΝ ΜΗΧΑΝΙΚΩΝ",
+      "theseis": 1,
+      "filled": 1,
+      "kodikoi": 1,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΗΛΕΚΤΡΟΝΙΚΩΝ",
+      "theseis": 28,
+      "filled": 28,
+      "kodikoi": 14,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΜΗΧΑΝΟΛΟΓΩΝ ΜΗΧΑΝΙΚΩΝ ή ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΠΟΛΙΤΙΚΩΝ ΜΗΧΑΝΙΚΩΝ",
+      "theseis": 3,
+      "filled": 3,
+      "kodikoi": 1,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΠΟΛΙΤΙΚΩΝ ΜΗΧΑΝΙΚΩΝ",
+      "theseis": 288,
+      "filled": 288,
+      "kodikoi": 186,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΠΟΛΙΤΙΚΩΝ ΜΗΧΑΝΙΚΩΝ ή ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΤΟΠΟΓΡΑΦΩΝ ΜΗΧΑΝΙΚΩΝ",
+      "theseis": 3,
+      "filled": 3,
+      "kodikoi": 2,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΜΗΧΑΝΙΚΩΝ ΕΙΔ. ΤΕ ΤΕΧΝΟΛΟΓΩΝ ΠΕΤΡΕΛΑΙΟΥ ΚΑΙ ΦΥΣΙΚΟΥ ΑΕΡΙΟΥ",
+      "theseis": 3,
+      "filled": 3,
+      "kodikoi": 3,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΠΑΙΔΑΓΩΓΩΝ ΠΡΩΙΜΗΣ ΠΑΙΔΙΚΗΣ ΗΛΙΚΙΑΣ",
+      "theseis": 63,
+      "filled": 63,
+      "kodikoi": 47,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΠΕΡΙΒΑΛΛΟΝΤΟΣ",
+      "theseis": 3,
+      "filled": 3,
+      "kodikoi": 3,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΣΥΝΤΗΡΗΤΩΝ ΑΡΧΑΙΟΤΗΤΩΝ ΚΑΙ ΕΡΓΩΝ ΤΕΧΝΗΣ",
+      "theseis": 22,
+      "filled": 22,
+      "kodikoi": 18,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΤΕΛΩΝΕΙΑΚΩΝ",
+      "theseis": 44,
+      "filled": 44,
+      "kodikoi": 31,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΤΕΧΝΟΛΟΓΩΝ ΓΕΩΠΟΝΙΑΣ ΕΙΔ. ΤΕ ΓΕΩΠΟΝΙΑΣ",
+      "theseis": 31,
+      "filled": 31,
+      "kodikoi": 29,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΤΕΧΝΟΛΟΓΩΝ ΓΕΩΠΟΝΙΑΣ ΕΙΔ. ΤΕ ΔΑΣΟΠΟΝΙΑΣ",
+      "theseis": 11,
+      "filled": 11,
+      "kodikoi": 11,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΤΕΧΝΟΛΟΓΩΝ ΓΕΩΠΟΝΙΑΣ ΕΙΔ. ΤΕ ΖΩΙΚΗΣ ΠΑΡΑΓΩΓΗΣ",
+      "theseis": 7,
+      "filled": 7,
+      "kodikoi": 7,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΤΕΧΝΟΛΟΓΩΝ ΓΕΩΠΟΝΙΑΣ ΕΙΔ. ΤΕ ΙΧΘΥΟΚΟΜΙΑΣ-ΑΛΙΕΙΑΣ",
+      "theseis": 5,
+      "filled": 5,
+      "kodikoi": 5,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΕ ΤΕΧΝΟΛΟΓΩΝ ΤΡΟΦΙΜΩΝ",
+      "theseis": 16,
+      "filled": 16,
+      "kodikoi": 14,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    }
+  ],
+  "by_perifereia": [
+    {
+      "name": "ΡΟΔΟΥ",
+      "theseis": 64,
+      "filled": 44,
+      "kodikoi": 42,
+      "kodikoi_adiathetoi": 11,
+      "adiathetes": 20
+    },
+    {
+      "name": "ΜΑΓΝΗΣΙΑΣ",
+      "theseis": 57,
+      "filled": 47,
+      "kodikoi": 37,
+      "kodikoi_adiathetoi": 2,
+      "adiathetes": 10
+    },
+    {
+      "name": "ΛΕΣΒΟΥ",
+      "theseis": 56,
+      "filled": 48,
+      "kodikoi": 36,
+      "kodikoi_adiathetoi": 6,
+      "adiathetes": 8
+    },
+    {
+      "name": "ΔΥΤΙΚΗΣ ΑΤΤΙΚΗΣ",
+      "theseis": 63,
+      "filled": 56,
+      "kodikoi": 40,
+      "kodikoi_adiathetoi": 6,
+      "adiathetes": 7
+    },
+    {
+      "name": "ΘΗΡΑΣ",
+      "theseis": 24,
+      "filled": 17,
+      "kodikoi": 21,
+      "kodikoi_adiathetoi": 7,
+      "adiathetes": 7
+    },
+    {
+      "name": "ΚΑΛΥΜΝΟΥ",
+      "theseis": 17,
+      "filled": 10,
+      "kodikoi": 17,
+      "kodikoi_adiathetoi": 7,
+      "adiathetes": 7
+    },
+    {
+      "name": "ΧΑΝΙΩΝ",
+      "theseis": 50,
+      "filled": 43,
+      "kodikoi": 39,
+      "kodikoi_adiathetoi": 7,
+      "adiathetes": 7
+    },
+    {
+      "name": "ΔΡΑΜΑΣ",
+      "theseis": 25,
+      "filled": 19,
+      "kodikoi": 21,
+      "kodikoi_adiathetoi": 3,
+      "adiathetes": 6
+    },
+    {
+      "name": "ΚΕΝΤΡΙΚΟΥ ΤΟΜΕΑ ΑΘΗΝΩΝ",
+      "theseis": 364,
+      "filled": 358,
+      "kodikoi": 183,
+      "kodikoi_adiathetoi": 5,
+      "adiathetes": 6
+    },
+    {
+      "name": "ΡΕΘΥΜΝΟΥ",
+      "theseis": 28,
+      "filled": 22,
+      "kodikoi": 21,
+      "kodikoi_adiathetoi": 3,
+      "adiathetes": 6
+    },
+    {
+      "name": "ΒΟΙΩΤΙΑΣ",
+      "theseis": 39,
+      "filled": 34,
+      "kodikoi": 28,
+      "kodikoi_adiathetoi": 4,
+      "adiathetes": 5
+    },
+    {
+      "name": "ΗΡΑΚΛΕΙΟΥ",
+      "theseis": 78,
+      "filled": 73,
+      "kodikoi": 44,
+      "kodikoi_adiathetoi": 4,
+      "adiathetes": 5
+    },
+    {
+      "name": "ΚΟΖΑΝΗΣ",
+      "theseis": 53,
+      "filled": 48,
+      "kodikoi": 30,
+      "kodikoi_adiathetoi": 3,
+      "adiathetes": 5
+    },
+    {
+      "name": "ΛΑΚΩΝΙΑΣ",
+      "theseis": 24,
+      "filled": 19,
+      "kodikoi": 21,
+      "kodikoi_adiathetoi": 5,
+      "adiathetes": 5
+    },
+    {
+      "name": "ΝΗΣΩΝ",
+      "theseis": 17,
+      "filled": 12,
+      "kodikoi": 15,
+      "kodikoi_adiathetoi": 4,
+      "adiathetes": 5
+    },
+    {
+      "name": "ΡΟΔΟΠΗΣ",
+      "theseis": 32,
+      "filled": 27,
+      "kodikoi": 25,
+      "kodikoi_adiathetoi": 5,
+      "adiathetes": 5
+    },
+    {
+      "name": "ΣΕΡΡΩΝ",
+      "theseis": 20,
+      "filled": 15,
+      "kodikoi": 15,
+      "kodikoi_adiathetoi": 3,
+      "adiathetes": 5
+    },
+    {
+      "name": "ΣΥΡΟΥ",
+      "theseis": 34,
+      "filled": 29,
+      "kodikoi": 24,
+      "kodikoi_adiathetoi": 5,
+      "adiathetes": 5
+    },
+    {
+      "name": "ΑΝΑΤΟΛΙΚΗΣ ΑΤΤΙΚΗΣ",
+      "theseis": 119,
+      "filled": 115,
+      "kodikoi": 66,
+      "kodikoi_adiathetoi": 4,
+      "adiathetes": 4
+    },
+    {
+      "name": "ΕΒΡΟΥ",
+      "theseis": 38,
+      "filled": 34,
+      "kodikoi": 32,
+      "kodikoi_adiathetoi": 4,
+      "adiathetes": 4
+    },
+    {
+      "name": "ΕΥΡΥΤΑΝΙΑΣ",
+      "theseis": 21,
+      "filled": 17,
+      "kodikoi": 16,
+      "kodikoi_adiathetoi": 3,
+      "adiathetes": 4
+    },
+    {
+      "name": "ΖΑΚΥΝΘΟΥ",
+      "theseis": 18,
+      "filled": 14,
+      "kodikoi": 14,
+      "kodikoi_adiathetoi": 3,
+      "adiathetes": 4
+    },
+    {
+      "name": "ΘΕΣΣΑΛΟΝΙΚΗΣ",
+      "theseis": 129,
+      "filled": 125,
+      "kodikoi": 98,
+      "kodikoi_adiathetoi": 3,
+      "adiathetes": 4
+    },
+    {
+      "name": "ΚΑΒΑΛΑΣ",
+      "theseis": 25,
+      "filled": 21,
+      "kodikoi": 22,
+      "kodikoi_adiathetoi": 4,
+      "adiathetes": 4
+    },
+    {
+      "name": "ΚΙΛΚΙΣ",
+      "theseis": 20,
+      "filled": 16,
+      "kodikoi": 17,
+      "kodikoi_adiathetoi": 3,
+      "adiathetes": 4
+    },
+    {
+      "name": "ΚΟΡΙΝΘΙΑΣ",
+      "theseis": 25,
+      "filled": 21,
+      "kodikoi": 21,
+      "kodikoi_adiathetoi": 4,
+      "adiathetes": 4
+    },
+    {
+      "name": "ΜΕΣΣΗΝΙΑΣ",
+      "theseis": 41,
+      "filled": 37,
+      "kodikoi": 37,
+      "kodikoi_adiathetoi": 4,
+      "adiathetes": 4
+    },
+    {
+      "name": "ΠΕΙΡΑΙΩΣ",
+      "theseis": 136,
+      "filled": 132,
+      "kodikoi": 70,
+      "kodikoi_adiathetoi": 4,
+      "adiathetes": 4
+    },
+    {
+      "name": "ΦΛΩΡΙΝΑΣ",
+      "theseis": 31,
+      "filled": 27,
+      "kodikoi": 19,
+      "kodikoi_adiathetoi": 3,
+      "adiathetes": 4
+    },
+    {
+      "name": "ΕΥΒΟΙΑΣ",
+      "theseis": 35,
+      "filled": 32,
+      "kodikoi": 31,
+      "kodikoi_adiathetoi": 3,
+      "adiathetes": 3
+    },
+    {
+      "name": "ΗΛΕΙΑΣ",
+      "theseis": 33,
+      "filled": 30,
+      "kodikoi": 27,
+      "kodikoi_adiathetoi": 3,
+      "adiathetes": 3
+    },
+    {
+      "name": "ΚΑΣΤΟΡΙΑΣ",
+      "theseis": 32,
+      "filled": 29,
+      "kodikoi": 23,
+      "kodikoi_adiathetoi": 2,
+      "adiathetes": 3
+    },
+    {
+      "name": "ΛΑΣΙΘΙΟΥ",
+      "theseis": 28,
+      "filled": 25,
+      "kodikoi": 22,
+      "kodikoi_adiathetoi": 2,
+      "adiathetes": 3
+    },
+    {
+      "name": "ΑΙΤΩΛΟΑΚΑΡΝΑΝΙΑΣ",
+      "theseis": 32,
+      "filled": 30,
+      "kodikoi": 26,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 2
+    },
+    {
+      "name": "ΑΡΚΑΔΙΑΣ",
+      "theseis": 24,
+      "filled": 22,
+      "kodikoi": 22,
+      "kodikoi_adiathetoi": 2,
+      "adiathetes": 2
+    },
+    {
+      "name": "ΚΕΡΚΥΡΑΣ",
+      "theseis": 29,
+      "filled": 27,
+      "kodikoi": 25,
+      "kodikoi_adiathetoi": 2,
+      "adiathetes": 2
+    },
+    {
+      "name": "ΚΩ",
+      "theseis": 9,
+      "filled": 7,
+      "kodikoi": 6,
+      "kodikoi_adiathetoi": 2,
+      "adiathetes": 2
+    },
+    {
+      "name": "ΛΑΡΙΣΑΣ",
+      "theseis": 50,
+      "filled": 48,
+      "kodikoi": 40,
+      "kodikoi_adiathetoi": 2,
+      "adiathetes": 2
+    },
+    {
+      "name": "ΜΥΚΟΝΟΥ",
+      "theseis": 6,
+      "filled": 4,
+      "kodikoi": 6,
+      "kodikoi_adiathetoi": 2,
+      "adiathetes": 2
+    },
+    {
+      "name": "ΝΑΞΟΥ",
+      "theseis": 5,
+      "filled": 3,
+      "kodikoi": 4,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 2
+    },
+    {
+      "name": "ΠΑΡΟΥ",
+      "theseis": 5,
+      "filled": 3,
+      "kodikoi": 4,
+      "kodikoi_adiathetoi": 2,
+      "adiathetes": 2
+    },
+    {
+      "name": "ΣΑΜΟΥ",
+      "theseis": 12,
+      "filled": 10,
+      "kodikoi": 12,
+      "kodikoi_adiathetoi": 2,
+      "adiathetes": 2
+    },
+    {
+      "name": "ΣΠΟΡΑΔΩΝ",
+      "theseis": 8,
+      "filled": 6,
+      "kodikoi": 8,
+      "kodikoi_adiathetoi": 2,
+      "adiathetes": 2
+    },
+    {
+      "name": "ΦΘΙΩΤΙΔΑΣ",
+      "theseis": 33,
+      "filled": 31,
+      "kodikoi": 29,
+      "kodikoi_adiathetoi": 2,
+      "adiathetes": 2
+    },
+    {
+      "name": "ΦΩΚΙΔΑΣ",
+      "theseis": 14,
+      "filled": 12,
+      "kodikoi": 13,
+      "kodikoi_adiathetoi": 2,
+      "adiathetes": 2
+    },
+    {
+      "name": "ΧΑΛΚΙΔΙΚΗΣ",
+      "theseis": 19,
+      "filled": 17,
+      "kodikoi": 17,
+      "kodikoi_adiathetoi": 2,
+      "adiathetes": 2
+    },
+    {
+      "name": "ΑΡΓΟΛΙΔΑΣ",
+      "theseis": 15,
+      "filled": 14,
+      "kodikoi": 14,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΑΧΑΪΑΣ",
+      "theseis": 42,
+      "filled": 41,
+      "kodikoi": 31,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΒΟΡΕΙΟΥ ΤΟΜΕΑ ΑΘΗΝΩΝ",
+      "theseis": 128,
+      "filled": 127,
+      "kodikoi": 66,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΓΡΕΒΕΝΩΝ",
+      "theseis": 19,
+      "filled": 18,
+      "kodikoi": 15,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΘΑΣΟΥ",
+      "theseis": 7,
+      "filled": 6,
+      "kodikoi": 6,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΘΕΣΠΡΩΤΙΑΣ",
+      "theseis": 9,
+      "filled": 8,
+      "kodikoi": 7,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΙΩΑΝΝΙΝΩΝ",
+      "theseis": 32,
+      "filled": 31,
+      "kodikoi": 25,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΚΑΡΔΙΤΣΑΣ",
+      "theseis": 18,
+      "filled": 17,
+      "kodikoi": 17,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΚΑΡΠΑΘΟΥ-ΗΡΩΙΚΗΣ ΝΗΣΟΥ ΚΑΣΟΥ",
+      "theseis": 6,
+      "filled": 5,
+      "kodikoi": 4,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΚΕΦΑΛΛΗΝΙΑΣ",
+      "theseis": 12,
+      "filled": 11,
+      "kodikoi": 11,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΜΗΛΟΥ",
+      "theseis": 3,
+      "filled": 2,
+      "kodikoi": 3,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΝΟΤΙΟΥ ΤΟΜΕΑ ΑΘΗΝΩΝ",
+      "theseis": 123,
+      "filled": 122,
+      "kodikoi": 77,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΞΑΝΘΗΣ",
+      "theseis": 16,
+      "filled": 15,
+      "kodikoi": 15,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΠΕΛΛΑΣ",
+      "theseis": 12,
+      "filled": 11,
+      "kodikoi": 12,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΧΙΟΥ",
+      "theseis": 9,
+      "filled": 8,
+      "kodikoi": 9,
+      "kodikoi_adiathetoi": 1,
+      "adiathetes": 1
+    },
+    {
+      "name": "ΑΝΔΡΟΥ",
+      "theseis": 6,
+      "filled": 6,
+      "kodikoi": 5,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΑΡΤΑΣ",
+      "theseis": 14,
+      "filled": 14,
+      "kodikoi": 13,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΔΥΤΙΚΟΥ ΤΟΜΕΑ ΑΘΗΝΩΝ",
+      "theseis": 56,
+      "filled": 56,
+      "kodikoi": 32,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΗΜΑΘΙΑΣ",
+      "theseis": 13,
+      "filled": 13,
+      "kodikoi": 11,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΙΘΑΚΗΣ",
+      "theseis": 2,
+      "filled": 2,
+      "kodikoi": 2,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΚΕΑΣ - ΚΥΘΝΟΥ",
+      "theseis": 1,
+      "filled": 1,
+      "kodikoi": 1,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΛΕΥΚΑΔΑΣ",
+      "theseis": 9,
+      "filled": 9,
+      "kodikoi": 8,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΛΗΜΝΟΥ",
+      "theseis": 4,
+      "filled": 4,
+      "kodikoi": 4,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΠΙΕΡΙΑΣ",
+      "theseis": 14,
+      "filled": 14,
+      "kodikoi": 12,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΠΡΕΒΕΖΑΣ",
+      "theseis": 14,
+      "filled": 14,
+      "kodikoi": 10,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΗΝΟΥ",
+      "theseis": 5,
+      "filled": 5,
+      "kodikoi": 3,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    },
+    {
+      "name": "ΤΡΙΚΑΛΩΝ",
+      "theseis": 17,
+      "filled": 17,
+      "kodikoi": 16,
+      "kodikoi_adiathetoi": 0,
+      "adiathetes": 0
+    }
+  ]
+}

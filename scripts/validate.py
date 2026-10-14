@@ -121,6 +121,24 @@ def main():
     check(filecmp.cmp(DATA / "positions.json", WEB / "positions.json", shallow=False),
           "web/public/data/positions.json συγχρονισμένο με data/positions.json")
 
+    print("\n[3β] Αδιάθετες θέσεις & βάσεις (σελίδα Στατιστικά)")
+    ts = load(WEB / "theseis_stats.json")
+    expected_unfilled = total_theseis - len(flagged)
+    check(ts["adiathetes"] == expected_unfilled and ts["filled"] == len(flagged),
+          f"theseis_stats: {ts['filled']:,} καλυμμένες + {ts['adiathetes']:,} αδιάθετες = {total_theseis:,}")
+    for key in ("by_eidikotita", "by_perifereia"):
+        rows = ts[key]
+        check(sum(r["adiathetes"] for r in rows) == expected_unfilled
+              and sum(r["theseis"] for r in rows) == total_theseis,
+              f"{key}: τα επιμέρους αθροίζουν στα σύνολα ({len(rows)} γραμμές)")
+    bad_vasi = []
+    for s, recs in by_slug.items():
+        appointed = [r["vathmologia"] for r in recs if r["dioristike"]]
+        expected = min(appointed) if appointed else None
+        if eid_stats[s].get("vasi") != expected:
+            bad_vasi.append(s)
+    check(not bad_vasi, f"βάση κάθε ειδικότητας = χαμηλότερη βαθμολογία διοριστέου {bad_vasi[:3] if bad_vasi else ''}")
+
     print("\n[4] Καμία ειδικότητα/θέση χωρίς αντιστοίχιση")
     table_codes = defaultdict(set)
     for r in candidates:
