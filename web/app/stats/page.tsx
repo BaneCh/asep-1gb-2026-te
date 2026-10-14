@@ -157,7 +157,7 @@ export default function StatsPage() {
 
     return [
       { name: "Με Μεταπτυχιακό", value: metaptyxiako, color: "var(--primary-text)" },
-      { name: "Χωρίς Μεταπτυχιακό", value: Math.max(0, total - metaptyxiako), color: "#c4c1b8" },
+      { name: "Χωρίς Μεταπτυχιακό", value: Math.max(0, total - metaptyxiako), color: "#61cae4" },
     ];
   }, [data]);
 
