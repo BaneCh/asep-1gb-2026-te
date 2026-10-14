@@ -1,4 +1,4 @@
-# ΑΣΕΠ 1ΓΒ/2026 (ΤΕ) — Results Explorer
+# ΑΣΕΠ 1ΓΒ/2026 ΤΕ — Results Explorer
 
 An interactive site for the **final results of ASEP announcement 1ΓΒ/2026**: 2,628 permanent
 positions for **Technological Education (ΤΕ)** graduates, filled from the 1Γ/2025 written exam.
