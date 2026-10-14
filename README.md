@@ -3,6 +3,8 @@
 An interactive site for the **final results of ASEP announcement 1ΓΒ/2026**: 2,628 permanent
 positions for **Technological Education (ΤΕ)** graduates, filled from the 1Γ/2025 written exam.
 
+🔗 **Live site: [asep-1gb-2026-te.vercel.app](https://asep-1gb-2026-te.vercel.app)**
+
 - 34 ranking tables (one per specialty) · 22,542 ranking rows · 9,360 unique candidates
 - 2,407 appointed (διοριστέοι) · 1,815 position codes · 2,628 positions (221 left unfilled)
 - Search by ΑΜ or name, specialty pages, position pages, statistics and a map of positions
@@ -88,24 +90,25 @@ The site shows no more than ASEP published, and less where possible:
   ΔΙΟΡΙΣΤΕΟΙ file, and the **rejected candidates** (ΑΠΟΡΡΙΠΤΕΟΙ) file, which is not read at all.
 - `validate.py` enforces a whitelist of fields and the ID mask on every public record.
 
-## Running the website
+## Deployment
+
+The site is hosted on **Vercel** (project Root Directory: `web`). Every push to `main` redeploys
+[asep-1gb-2026-te.vercel.app](https://asep-1gb-2026-te.vercel.app) automatically; pushes to other
+branches get a private preview link.
+
+To preview changes locally before pushing:
 
 ```powershell
 cd web
-npm install
+npm install        # first time only
 npm run dev        # http://localhost:3000
-npm run build      # production build
-npm run lint
 ```
 
-Environment variables (optional, e.g. in `web/.env.local` or on Vercel):
-
-| Variable | Purpose |
-|---|---|
-| `NEXT_PUBLIC_SITE_URL` | Public URL used in metadata, Open Graph and the sitemap. On Vercel the production domain is used if unset. |
-| `NEXT_PUBLIC_CONTACT_URL` | Contact link (`mailto:` or URL) on the privacy page for name-removal requests. Defaults to the author's LinkedIn (`web/lib/site.ts`). |
-
-On Vercel, set the project's Root Directory to `web/`.
+Site-wide settings — author name and links, contact for removal requests, official sources —
+are in [`web/lib/site.ts`](web/lib/site.ts); the default light/dark theme is in
+[`web/lib/theme.ts`](web/lib/theme.ts) and the colours in [`web/app/globals.css`](web/app/globals.css).
+Two optional environment variables can override settings on Vercel: `NEXT_PUBLIC_SITE_URL`
+(only needed for a custom domain) and `NEXT_PUBLIC_CONTACT_URL`.
 
 ## Known limitations
 
