@@ -5,7 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Analytics } from "@vercel/analytics/react";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
-import { THEME_INIT_SCRIPT } from "@/lib/theme";
+import { DEFAULT_THEME, THEME_INIT_SCRIPT } from "@/lib/theme";
 
 // Poppins όπως στο alexveskos.html (λατινικά/αριθμοί). Η Poppins δεν έχει
 // ελληνικούς χαρακτήρες, οπότε τα ελληνικά αποδίδονται με τη Manrope.
@@ -84,7 +84,7 @@ export default function RootLayout({
     <html
       lang="el"
       className={`${poppins.variable} ${manrope.variable} ${jetbrainsMono.variable}`}
-      data-theme="light"
+      data-theme={DEFAULT_THEME}
       suppressHydrationWarning
       data-scroll-behavior="smooth"
     >

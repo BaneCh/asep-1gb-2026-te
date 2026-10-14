@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { THEME_STORAGE_KEY } from "@/lib/theme";
+import { DEFAULT_THEME, THEME_STORAGE_KEY } from "@/lib/theme";
 
 // Light / dark όπως στο alexveskos.html: «Active: Light Mode» + ήλιος/φεγγάρι.
 // Το θέμα αποθηκεύεται στο localStorage και εφαρμόζεται πριν το πρώτο paint
@@ -20,7 +20,7 @@ function subscribe(onChange: () => void) {
 }
 
 export default function ThemeToggle() {
-  const theme = useSyncExternalStore<Theme>(subscribe, readTheme, () => "light");
+  const theme = useSyncExternalStore<Theme>(subscribe, readTheme, () => DEFAULT_THEME);
 
   function toggle() {
     const next: Theme = theme === "dark" ? "light" : "dark";
