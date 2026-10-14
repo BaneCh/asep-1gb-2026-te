@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF" />
+      <stop offset="100%" stop-color="#FF006E" />
+    </linearGradient>
+  </defs>
+  <!-- Background rounded box with border -->
+  <rect width="64" height="64" rx="16" fill="#0A0E1A" />
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="url(#grad)" stroke-width="3" />
+  <!-- Letter A styled -->
+  <text 
+    x="50%" 
+    y="54%" 
+    text-anchor="middle" 
+    dominant-baseline="central" 
+    font-family="system-ui, -apple-system, sans-serif" 
+    font-size="36" 
+    font-weight="900" 
+    fill="url(#grad)"
+  >
+    Α
+  </text>
+</svg>

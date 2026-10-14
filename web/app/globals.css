@@ -1,0 +1,349 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Θέμα χρωμάτων — ίδιο με το alexveskos.html (traffiq.gr/alexandrosveskos)
+   Light: κρεμ φόντο #f9f7f1, λευκές κάρτες με μαύρο περίγραμμα, accent #61cae4
+   Dark:  φόντο #111, κάρτες #1a1a1a / #2e2e2e, ίδιο accent
+   Το θέμα ορίζεται με το attribute data-theme στο <html> (βλ. ThemeToggle).
+   ========================================================================== */
+
+:root {
+  --bg: #f9f7f1;
+  --bg-elevated: #ffffff;          /* tooltips, dropdowns */
+  --surface: #ffffff;              /* κάρτες */
+  --surface-subtle: rgba(0, 0, 0, 0.035); /* γραμμές λιστών */
+  --surface-strong: #dcdad3;       /* κουμπιά (btn-outline) */
+  --surface-strong-hover: #cfccc3;
+  --card-border: #000000;
+  --border: #e0ddd6;
+  --border-strong: rgba(0, 0, 0, 0.18);
+
+  --text-heading: #000000;
+  --text: #333333;
+  --text-muted: #666666;
+  --text-dim: #999999;
+
+  --primary: #61cae4;              /* accent (περιγράμματα, γεμίσματα) */
+  --primary-rgb: 97 202 228;
+  --primary-text: #000000;         /* «έμφαση» στο κείμενο: ασπρόμαυρη (το cyan μόνο σε γραφικά) */
+  --success: #1f9d6b;
+  --success-rgb: 31 157 107;
+  --danger: #c2410c;
+  --danger-rgb: 194 65 12;
+  --warning: #b7791f;
+
+  --map-empty: #e7e4dc;
+  --map-stroke: #f9f7f1;
+
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #111111;
+  --bg-elevated: #1a1a1a;
+  --surface: #1a1a1a;
+  --surface-subtle: rgba(255, 255, 255, 0.03);
+  --surface-strong: #2a2a2a;
+  --surface-strong-hover: #363636;
+  --card-border: #2e2e2e;
+  --border: #222222;
+  --border-strong: rgba(255, 255, 255, 0.14);
+
+  --text-heading: #ffffff;
+  --text: #cccccc;
+  --text-muted: #888888;
+  --text-dim: #666666;
+
+  --primary: #61cae4;
+  --primary-rgb: 97 202 228;
+  --primary-text: #ffffff;
+  --success: #34d399;
+  --success-rgb: 52 211 153;
+  --danger: #f87171;
+  --danger-rgb: 248 113 113;
+  --warning: #fbbf24;
+
+  --map-empty: #1f1f1f;
+  --map-stroke: #111111;
+
+  color-scheme: dark;
+}
+
+/* Tailwind χρώματα που ακολουθούν το θέμα (π.χ. text-heading, bg-surface, border-line) */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-surface: var(--surface);
+  --color-surface-subtle: var(--surface-subtle);
+  --color-surface-strong: var(--surface-strong);
+  --color-card: var(--card-border);
+  --color-line: var(--border);
+  --color-heading: var(--text-heading);
+  --color-body: var(--text);
+  --color-muted: var(--text-muted);
+  --color-dim: var(--text-dim);
+  --color-primary: var(--primary);
+  --color-primary-text: var(--primary-text);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+
+  --font-display: var(--font-poppins), var(--font-manrope), system-ui, sans-serif;
+  --font-body: var(--font-poppins), var(--font-manrope), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+/* === Base === */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-poppins), var(--font-manrope), system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4 {
+  color: var(--text-heading);
+}
+
+.font-display {
+  font-family: var(--font-poppins), var(--font-manrope), system-ui, sans-serif;
+}
+
+/* === Scrollbar === */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-strong);
+  border-radius: 10px;
+  border: 2px solid var(--bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* === Utility Classes === */
+
+/* Κάρτα — όπως τα .project-card του alexveskos.html */
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+}
+
+.glass-hover {
+  transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+}
+
+.glass-hover:hover {
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+[data-theme="dark"] .glass-hover:hover {
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Κουμπιά — όπως το .btn-outline του alexveskos.html */
+.btn-outline,
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 30px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-outline {
+  background: var(--surface-strong);
+  color: var(--text-heading);
+  border: 1px solid var(--border-strong);
+}
+
+.btn-outline:hover {
+  background: var(--surface-strong-hover);
+}
+
+.btn-accent {
+  background: var(--primary);
+  color: #000;
+  border: 1px solid var(--primary);
+}
+
+.btn-accent:hover {
+  background: #4fb9d4;
+}
+
+/* Έμφαση σε τίτλους: ίδιο χρώμα με τα υπόλοιπα γράμματα (χωρίς cyan) */
+.text-gradient {
+  color: var(--text-heading);
+}
+
+.text-glow {
+  text-shadow: none;
+}
+
+/* ==========================================================================
+   Theme toggle — αντίγραφο του .pf-toggle (ήλιος / φεγγάρι) του alexveskos.html
+   ========================================================================== */
+.pf-theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.pf-active {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: nowrap;
+}
+
+.pf-toggle {
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: block;
+  height: 24px;
+  width: 24px;
+  overflow: hidden;
+  transition: 0.5s all ease;
+}
+
+.pf-toggle::before {
+  content: "";
+  display: block;
+  position: absolute;
+}
+
+.toggle-light.pf-toggle::before {
+  animation-duration: 0.5s;
+  animation-name: sun;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  box-shadow: 10px 0 0 -3.5px rgba(255, 255, 255, 0.6),
+             -10px 0 0 -3.5px rgba(255, 255, 255, 0.6),
+              0 -10px 0 -3.5px rgba(255, 255, 255, 0.6),
+              0  10px 0 -3.5px rgba(255, 255, 255, 0.6),
+              7px -7px 0 -3.5px rgba(255, 255, 255, 0.6),
+              7px  7px 0 -3.5px rgba(255, 255, 255, 0.6),
+             -7px  7px 0 -3.5px rgba(255, 255, 255, 0.6),
+             -7px -7px 0 -3.5px rgba(255, 255, 255, 0.6);
+  height: 10px;
+  left: 7px;
+  top: 7px;
+  width: 10px;
+}
+
+.pf-theme-toggle:hover .toggle-light.pf-toggle::before {
+  background-color: #fff;
+  box-shadow: 10px 0 0 -3.5px #fff,
+             -10px 0 0 -3.5px #fff,
+              0 -10px 0 -3.5px #fff,
+              0  10px 0 -3.5px #fff,
+              7px -7px 0 -3.5px #fff,
+              7px  7px 0 -3.5px #fff,
+             -7px  7px 0 -3.5px #fff,
+             -7px -7px 0 -3.5px #fff;
+}
+
+.toggle-dark.pf-toggle::before {
+  animation-duration: 0.5s;
+  animation-name: moon;
+  background-color: #555;
+  border-radius: 50%;
+  height: 20px;
+  left: 2px;
+  top: 2px;
+  width: 20px;
+  z-index: 1;
+}
+
+.pf-theme-toggle:hover .toggle-dark.pf-toggle::before {
+  background-color: #777;
+}
+
+.toggle-dark.pf-toggle::after {
+  animation-duration: 0.5s;
+  animation-name: moon-shadow;
+  background: #000;
+  border-radius: 50%;
+  content: "";
+  display: block;
+  height: 20px;
+  left: 8px;
+  position: absolute;
+  top: -5px;
+  width: 20px;
+  z-index: 2;
+}
+
+@keyframes sun {
+  from {
+    background-color: #282828;
+    box-shadow: 0 0 0 -5px #282828, 0 0 0 -5px #282828, 0 0 0 -5px #282828,
+                0 0 0 -5px #282828, 0 0 0 -5px #282828, 0 0 0 -5px #282828,
+                0 0 0 -5px #282828, 0 0 0 -5px #282828;
+  }
+  to {
+    background-color: #999;
+    box-shadow: 10px 0 0 -3.5px #999, -10px 0 0 -3.5px #999,
+                0 -10px 0 -3.5px #999, 0 10px 0 -3.5px #999,
+                7px -7px 0 -3.5px #999, 7px 7px 0 -3.5px #999,
+                -7px 7px 0 -3.5px #999, -7px -7px 0 -3.5px #999;
+  }
+}
+
+@keyframes moon {
+  from { height: 0; left: 12px; top: 12px; width: 0; }
+  to { height: 20px; left: 2px; top: 2px; width: 20px; }
+}
+
+@keyframes moon-shadow {
+  from { background-color: #282828; height: 0; left: 12px; top: 7px; width: 0; }
+  to { background-color: #000; height: 20px; left: 8px; top: -5px; width: 20px; }
+}
+
+@media (max-width: 640px) {
+  .pf-active { display: none; }
+}

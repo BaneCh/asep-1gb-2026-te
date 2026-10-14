@@ -1,0 +1,172 @@
+[
+  {
+    "eidikotita": "ΤΕ ΑΥΤΟΜΑΤΙΣΜΟΥ",
+    "slug": "te-aytomatismoy",
+    "count": 31
+  },
+  {
+    "eidikotita": "ΤΕ ΒΙΒΛΙΟΘΗΚΟΝΟΜΙΑΣ",
+    "slug": "te-vivliothikonomias",
+    "count": 156
+  },
+  {
+    "eidikotita": "ΤΕ ΒΙΟΪΑΤΡΙΚΩΝ ΕΠΙΣΤΗΜΩΝ ΕΙΔ. ΤΕ ΙΑΤΡΙΚΩΝ ΕΡΓΑΣΤΗΡΙΩΝ",
+    "slug": "te-vioiatrikon-epistimon-eid-te-iatrikon-ergastirion",
+    "count": 92
+  },
+  {
+    "eidikotita": "ΤΕ ΓΕΩΠΟΝΙΑΣ",
+    "slug": "te-geoponias",
+    "count": 523
+  },
+  {
+    "eidikotita": "ΤΕ ΔΑΣΟΠΟΝΙΑΣ",
+    "slug": "te-dasoponias",
+    "count": 277
+  },
+  {
+    "eidikotita": "ΤΕ ΔΗΜΟΣ/ΚΩΝ-ΕΦΟΡΙΑΚΩΝ-ΤΕΛΩΝΕΙΑΚΩΝ",
+    "slug": "te-dimos-kon-eforiakon-teloneiakon",
+    "count": 2079
+  },
+  {
+    "eidikotita": "ΤΕ ΔΙΑΙΤΟΛΟΓΙΑΣ",
+    "slug": "te-diaitologias",
+    "count": 71
+  },
+  {
+    "eidikotita": "ΤΕ ΔΙΕΚΠΕΡΑΙΩΣΗΣ ΥΠΟΘΕΣΕΩΝ ΠΟΛΙΤΩΝ-ΤΕ ΔΙΟΙΚΗΤΙΚΟΥ-ΛΟΓΙΣΤΙΚΟΥ",
+    "slug": "te-diekperaiosis-ypotheseon-politon-te-dioikitikoy",
+    "count": 4832
+  },
+  {
+    "eidikotita": "ΤΕ ΔΙΟΙΚΗΣΗΣ ΜΟΝΑΔΩΝ ΤΟΠΙΚΗΣ ΑΥΤΟΔΙΟΙΚΗΣΗΣ",
+    "slug": "te-dioikisis-monadon-topikis-aytodioikisis",
+    "count": 186
+  },
+  {
+    "eidikotita": "ΤΕ ΔΙΟΙΚΗΣΗΣ ΜΟΝΑΔΩΝ ΥΓΕΙΑΣ ΚΑΙ ΠΡΟΝΟΙΑΣ",
+    "slug": "te-dioikisis-monadon-ygeias-kai-pronoias",
+    "count": 110
+  },
+  {
+    "eidikotita": "ΤΕ ΔΙΟΙΚΗΣΗΣ ΤΟΥΡΙΣΜΟΥ",
+    "slug": "te-dioikisis-toyrismoy",
+    "count": 193
+  },
+  {
+    "eidikotita": "ΤΕ ΔΙΟΙΚΗΤΙΚΟΥ-ΛΟΓΙΣΤΙΚΟΥ ΕΙΔ. ΤΕ ΛΟΓΙΣΤΙΚΟΥ",
+    "slug": "te-dioikitikoy-logistikoy-eid-te-logistikoy",
+    "count": 2744
+  },
+  {
+    "eidikotita": "ΤΕ ΕΠΙΚΟΙΝΩΝΙΑΣ ΚΑΙ ΔΗΜΟΣΙΩΝ ΣΧΕΣΕΩΝ",
+    "slug": "te-epikoinonias-kai-dimosion-scheseon",
+    "count": 56
+  },
+  {
+    "eidikotita": "ΤΕ ΕΠΙΜ. ΑΝΗΛΙΚΩΝ-ΚΟΙΝ. ΑΡΩΓΗΣ-ΚΟΙΝ. ΛΕΙΤΟΥΡΓΩΝ",
+    "slug": "te-epim-anilikon-koin-arogis-koin-leitoyrgon",
+    "count": 168
+  },
+  {
+    "eidikotita": "ΤΕ ΕΠΙΣΚΕΠΤΩΝ ΥΓΕΙΑΣ",
+    "slug": "te-episkepton-ygeias",
+    "count": 35
+  },
+  {
+    "eidikotita": "ΤΕ ΕΠΟΠΤΩΝ ΔΗΜΟΣΙΑΣ ΥΓΕΙΑΣ",
+    "slug": "te-epopton-dimosias-ygeias",
+    "count": 95
+  },
+  {
+    "eidikotita": "ΤΕ ΕΡΓΟΘΕΡΑΠΕΙΑΣ",
+    "slug": "te-ergotherapeias",
+    "count": 8
+  },
+  {
+    "eidikotita": "ΤΕ ΖΩΙΚΗΣ ΠΑΡΑΓΩΓΗΣ",
+    "slug": "te-zoikis-paragogis",
+    "count": 94
+  },
+  {
+    "eidikotita": "ΤΕ ΗΛΕΚΤΡΟΛΟΓΩΝ ή ΜΗΧΑΝΟΛΟΓΩΝ ή ΠΟΛΙΤΙΚΩΝ ή ΤΟΠΟΓΡΑΦΩΝ ΜΗΧΑΝΙΚΩΝ",
+    "slug": "te-ilektrologon-i-michanologon-i-politikon-i-topografon",
+    "count": 351
+  },
+  {
+    "eidikotita": "ΤΕ ΗΛΕΚΤΡΟΛΟΓΩΝ ΜΗΧΑΝΙΚΩΝ",
+    "slug": "te-ilektrologon-michanikon",
+    "count": 219
+  },
+  {
+    "eidikotita": "ΤΕ ΗΛΕΚΤΡΟΝΙΚΩΝ",
+    "slug": "te-ilektronikon",
+    "count": 150
+  },
+  {
+    "eidikotita": "ΤΕ ΙΧΘΥΟΚΟΜΙΑΣ-ΑΛΙΕΙΑΣ",
+    "slug": "te-ichthyokomias-alieias",
+    "count": 41
+  },
+  {
+    "eidikotita": "ΤΕ ΛΟΓΟΘΕΡΑΠΕΙΑΣ",
+    "slug": "te-logotherapeias",
+    "count": 27
+  },
+  {
+    "eidikotita": "ΤΕ ΜΗΧΑΝΙΚΩΝ ΟΧΗΜΑΤΩΝ",
+    "slug": "te-michanikon-ochimaton",
+    "count": 23
+  },
+  {
+    "eidikotita": "ΤΕ ΜΗΧΑΝΟΛΟΓΩΝ ΜΗΧΑΝΙΚΩΝ",
+    "slug": "te-michanologon-michanikon",
+    "count": 297
+  },
+  {
+    "eidikotita": "ΤΕ ΠΑΙΔΑΓΩΓΩΝ ΠΡΩΙΜΗΣ ΠΑΙΔΙΚΗΣ ΗΛΙΚΙΑΣ",
+    "slug": "te-paidagogon-proimis-paidikis-ilikias",
+    "count": 238
+  },
+  {
+    "eidikotita": "ΤΕ ΠΕΡΙΒΑΛΛΟΝΤΟΣ",
+    "slug": "te-perivallontos",
+    "count": 64
+  },
+  {
+    "eidikotita": "ΤΕ ΠΛΗΡΟΦΟΡΙΚΗΣ (SOFTWARE Ή HARDWARE)",
+    "slug": "te-pliroforikis-software-i-hardware",
+    "count": 1050
+  },
+  {
+    "eidikotita": "ΤΕ ΠΟΛΙΤΙΚΩΝ ΜΗΧΑΝΙΚΩΝ",
+    "slug": "te-politikon-michanikon",
+    "count": 702
+  },
+  {
+    "eidikotita": "ΤΕ ΣΥΝΤΗΡΗΤΩΝ ΑΡΧΑΙΟΤΗΤΩΝ ΚΑΙ ΕΡΓΩΝ ΤΕΧΝΗΣ",
+    "slug": "te-syntiriton-archaiotiton-kai-ergon-technis",
+    "count": 150
+  },
+  {
+    "eidikotita": "ΤΕ ΤΕΧΝΟΛΟΓΩΝ ΠΕΤΡΕΛΑΙΟΥ ΚΑΙ ΦΥΣΙΚΟΥ ΑΕΡΙΟΥ",
+    "slug": "te-technologon-petrelaioy-kai-fysikoy-aerioy",
+    "count": 31
+  },
+  {
+    "eidikotita": "ΤΕ ΤΕΧΝΟΛΟΓΩΝ ΤΡΟΦΙΜΩΝ",
+    "slug": "te-technologon-trofimon",
+    "count": 153
+  },
+  {
+    "eidikotita": "ΤΕ ΤΟΠΟΓΡΑΦΩΝ ΜΗΧΑΝΙΚΩΝ",
+    "slug": "te-topografon-michanikon",
+    "count": 199
+  },
+  {
+    "eidikotita": "ΤΕ ΦΥΣΙΚΟΘΕΡΑΠΕΙΑΣ",
+    "slug": "te-fysikotherapeias",
+    "count": 69
+  }
+]

@@ -1,0 +1,120 @@
+{
+  "te-aytomatismoy": [
+    "te-aytomatismoy__0.json"
+  ],
+  "te-vivliothikonomias": [
+    "te-vivliothikonomias__0.json"
+  ],
+  "te-vioiatrikon-epistimon-eid-te-iatrikon-ergastirion": [
+    "te-vioiatrikon-epistimon-eid-te-iatrikon-ergastirion__0.json"
+  ],
+  "te-geoponias": [
+    "te-geoponias__0.json"
+  ],
+  "te-dasoponias": [
+    "te-dasoponias__0.json"
+  ],
+  "te-dimos-kon-eforiakon-teloneiakon": [
+    "te-dimos-kon-eforiakon-teloneiakon__0.json",
+    "te-dimos-kon-eforiakon-teloneiakon__1.json",
+    "te-dimos-kon-eforiakon-teloneiakon__2.json"
+  ],
+  "te-diaitologias": [
+    "te-diaitologias__0.json"
+  ],
+  "te-diekperaiosis-ypotheseon-politon-te-dioikitikoy": [
+    "te-diekperaiosis-ypotheseon-politon-te-dioikitikoy__0.json",
+    "te-diekperaiosis-ypotheseon-politon-te-dioikitikoy__1.json",
+    "te-diekperaiosis-ypotheseon-politon-te-dioikitikoy__2.json",
+    "te-diekperaiosis-ypotheseon-politon-te-dioikitikoy__3.json",
+    "te-diekperaiosis-ypotheseon-politon-te-dioikitikoy__4.json",
+    "te-diekperaiosis-ypotheseon-politon-te-dioikitikoy__5.json",
+    "te-diekperaiosis-ypotheseon-politon-te-dioikitikoy__6.json",
+    "te-diekperaiosis-ypotheseon-politon-te-dioikitikoy__7.json"
+  ],
+  "te-dioikisis-monadon-topikis-aytodioikisis": [
+    "te-dioikisis-monadon-topikis-aytodioikisis__0.json"
+  ],
+  "te-dioikisis-monadon-ygeias-kai-pronoias": [
+    "te-dioikisis-monadon-ygeias-kai-pronoias__0.json"
+  ],
+  "te-dioikisis-toyrismoy": [
+    "te-dioikisis-toyrismoy__0.json"
+  ],
+  "te-dioikitikoy-logistikoy-eid-te-logistikoy": [
+    "te-dioikitikoy-logistikoy-eid-te-logistikoy__0.json",
+    "te-dioikitikoy-logistikoy-eid-te-logistikoy__1.json",
+    "te-dioikitikoy-logistikoy-eid-te-logistikoy__2.json",
+    "te-dioikitikoy-logistikoy-eid-te-logistikoy__3.json",
+    "te-dioikitikoy-logistikoy-eid-te-logistikoy__4.json"
+  ],
+  "te-epikoinonias-kai-dimosion-scheseon": [
+    "te-epikoinonias-kai-dimosion-scheseon__0.json"
+  ],
+  "te-epim-anilikon-koin-arogis-koin-leitoyrgon": [
+    "te-epim-anilikon-koin-arogis-koin-leitoyrgon__0.json"
+  ],
+  "te-episkepton-ygeias": [
+    "te-episkepton-ygeias__0.json"
+  ],
+  "te-epopton-dimosias-ygeias": [
+    "te-epopton-dimosias-ygeias__0.json"
+  ],
+  "te-ergotherapeias": [
+    "te-ergotherapeias__0.json"
+  ],
+  "te-zoikis-paragogis": [
+    "te-zoikis-paragogis__0.json"
+  ],
+  "te-ilektrologon-i-michanologon-i-politikon-i-topografon": [
+    "te-ilektrologon-i-michanologon-i-politikon-i-topografon__0.json"
+  ],
+  "te-ilektrologon-michanikon": [
+    "te-ilektrologon-michanikon__0.json"
+  ],
+  "te-ilektronikon": [
+    "te-ilektronikon__0.json"
+  ],
+  "te-ichthyokomias-alieias": [
+    "te-ichthyokomias-alieias__0.json"
+  ],
+  "te-logotherapeias": [
+    "te-logotherapeias__0.json"
+  ],
+  "te-michanikon-ochimaton": [
+    "te-michanikon-ochimaton__0.json"
+  ],
+  "te-michanologon-michanikon": [
+    "te-michanologon-michanikon__0.json"
+  ],
+  "te-paidagogon-proimis-paidikis-ilikias": [
+    "te-paidagogon-proimis-paidikis-ilikias__0.json"
+  ],
+  "te-perivallontos": [
+    "te-perivallontos__0.json"
+  ],
+  "te-pliroforikis-software-i-hardware": [
+    "te-pliroforikis-software-i-hardware__0.json",
+    "te-pliroforikis-software-i-hardware__1.json",
+    "te-pliroforikis-software-i-hardware__2.json"
+  ],
+  "te-politikon-michanikon": [
+    "te-politikon-michanikon__0.json",
+    "te-politikon-michanikon__1.json"
+  ],
+  "te-syntiriton-archaiotiton-kai-ergon-technis": [
+    "te-syntiriton-archaiotiton-kai-ergon-technis__0.json"
+  ],
+  "te-technologon-petrelaioy-kai-fysikoy-aerioy": [
+    "te-technologon-petrelaioy-kai-fysikoy-aerioy__0.json"
+  ],
+  "te-technologon-trofimon": [
+    "te-technologon-trofimon__0.json"
+  ],
+  "te-topografon-michanikon": [
+    "te-topografon-michanikon__0.json"
+  ],
+  "te-fysikotherapeias": [
+    "te-fysikotherapeias__0.json"
+  ]
+}
