@@ -5,6 +5,7 @@ import { useEffect, useState, useMemo } from "react";
 import { formatNumber, formatVathmologia } from "@/lib/utils";
 import {
   AdiathetesCard,
+  KenesSearchCard,
   ProsontaCard,
   type TheseisStats,
   type ProsonImpact,
@@ -367,6 +368,9 @@ export default function StatsPage() {
 
         {/* Κενές θέσεις */}
         <AdiathetesCard data={data.theseis} />
+
+        {/* Αναζήτηση κενών θέσεων (ξεχωριστή κάρτα) */}
+        <KenesSearchCard kodikoi={data.theseis.kodikoi || []} />
 
         {/* Κατανομή Τίτλων Σπουδών (Mobile-Friendly Donut) */}
         <motion.div

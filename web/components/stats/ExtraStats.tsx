@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { Search } from "lucide-react";
 import { formatNumber } from "@/lib/utils";
 import { PERIFEREIES_MAPPING, REGION_TITLE_MAP, unitInRegion } from "@/lib/regions";
 
@@ -47,7 +48,7 @@ export function AdiathetesCard({ data }: { data: TheseisStats }) {
         Θέσεις της προκήρυξης για τις οποίες δεν προέκυψε διοριστέος.
       </p>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
           { label: "Θέσεις προκήρυξης", value: data.total_theseis },
           { label: "Καλύφθηκαν", value: data.filled },
@@ -60,21 +61,19 @@ export function AdiathetesCard({ data }: { data: TheseisStats }) {
           </div>
         ))}
       </div>
-
-      <KenesFilter kodikoi={data.kodikoi || []} />
     </motion.div>
   );
 }
 
-/* Φίλτρα κενών θέσεων (όπως στο 2ΓΒ/2026 /kenes-theseis). Αποτελέσματα εμφανίζονται
-   μόνο όταν ο χρήστης επιλέξει/γράψει κάτι. */
+/* Αναζήτηση κενών θέσεων — ξεχωριστή, τονισμένη κάρτα (όπως στο 2ΓΒ/2026
+   /kenes-theseis). Αποτελέσματα εμφανίζονται μόνο όταν ο χρήστης επιλέξει/γράψει κάτι. */
 function normalizeGr(s: string): string {
   return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 }
 
 const RESULTS_LIMIT = 80;
 
-function KenesFilter({ kodikoi }: { kodikoi: KenosKodikos[] }) {
+export function KenesSearchCard({ kodikoi }: { kodikoi: KenosKodikos[] }) {
   const [q, setQ] = useState("");
   const [area, setArea] = useState(""); // "R:<geoName>" για περιφέρεια ή όνομα ενότητας
   const [eid, setEid] = useState("");
@@ -118,15 +117,39 @@ function KenesFilter({ kodikoi }: { kodikoi: KenosKodikos[] }) {
   }, [kodikoi, q, area, eid, active]);
 
   const kenes = results.reduce((s, k) => s + k.adiathetes, 0);
+  const totalKenes = kodikoi.reduce((s, k) => s + k.adiathetes, 0);
   const field =
-    "w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line text-sm text-body focus:outline-none focus:border-primary";
+    "w-full px-3.5 py-3 rounded-xl bg-bg-elevated border border-line text-sm text-body focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/30";
 
   return (
-    <div className="pt-6 border-t border-line">
-      <h4 className="text-sm font-semibold text-heading mb-1">Αναζήτηση κενών θέσεων</h4>
-      <p className="text-xs text-muted mb-3">
-        Διάλεξε περιοχή ή ειδικότητα, ή γράψε κωδικό, φορέα ή δήμο, για να δεις τις θέσεις.
-      </p>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.55 }}
+      className="glass p-5 sm:p-8 rounded-2xl mb-8"
+      style={{
+        borderColor: "var(--primary)",
+        background:
+          "linear-gradient(180deg, rgb(var(--primary-rgb) / 0.10), rgb(var(--primary-rgb) / 0.02) 70%), var(--surface)",
+        boxShadow: "0 0 0 4px rgb(var(--primary-rgb) / 0.10), 0 12px 32px rgb(var(--primary-rgb) / 0.10)",
+      }}
+    >
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-5">
+        <div className="flex items-start gap-3">
+          <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-black flex-shrink-0">
+            <Search className="w-5 h-5" />
+          </span>
+          <div>
+            <h3 className="font-display text-xl sm:text-2xl font-bold text-heading">Αναζήτηση κενών θέσεων</h3>
+            <p className="text-xs sm:text-sm text-muted mt-1">
+              Διάλεξε περιοχή ή ειδικότητα, ή γράψε κωδικό, φορέα ή δήμο, για να δεις τις θέσεις.
+            </p>
+          </div>
+        </div>
+        <span className="text-xs font-mono text-primary-text px-2.5 py-1 rounded-full bg-primary/15 border border-primary/50 self-start whitespace-nowrap">
+          {formatNumber(kodikoi.length)} κωδικοί · {formatNumber(totalKenes)} κενές
+        </span>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <input
@@ -229,7 +252,7 @@ function KenesFilter({ kodikoi }: { kodikoi: KenosKodikos[] }) {
           )}
         </>
       )}
-    </div>
+    </motion.div>
   );
 }
 
