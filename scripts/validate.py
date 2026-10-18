@@ -138,6 +138,12 @@ def main():
         if eid_stats[s].get("vasi") != expected:
             bad_vasi.append(s)
     check(not bad_vasi, f"βάση κάθε ειδικότητας = χαμηλότερη βαθμολογία διοριστέου {bad_vasi[:3] if bad_vasi else ''}")
+    pi = load(WEB / "proson_impact.json")
+    n_entop = sum(1 for r in flagged if r["kod_entopiotitas"] not in (None, "", "0"))
+    check(pi["total_appointed"] == len(flagged)
+          and pi["appointed_with_entop"] == n_entop == sum(pi["entop_by_category"].values())
+          and all(0 <= pi[k] <= len(flagged) for k in pi if k.startswith("appointed_with_")),
+          f"proson_impact: {pi['total_appointed']:,} διοριστέοι, {n_entop:,} με εντοπιότητα")
 
     print("\n[4] Καμία ειδικότητα/θέση χωρίς αντιστοίχιση")
     table_codes = defaultdict(set)

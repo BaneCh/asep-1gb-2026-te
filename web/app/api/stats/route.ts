@@ -84,9 +84,13 @@ export async function GET() {
   // Καλυμμένες / αδιάθετες θέσεις (ανά ειδικότητα ΦΕΚ και περιφερειακή ενότητα)
   const theseis = getJson("theseis_stats.json");
 
+  // Προσόντα των διοριστέων (μεταπτυχιακό, εντοπιότητα, εμπειρία, ξένη γλώσσα)
+  const proson = getJson("proson_impact.json");
+
   return NextResponse.json({
     vaseis,
     theseis,
+    proson,
     global: globalStats,
     topByCount,
     topByDioristoi,

@@ -223,3 +223,85 @@ export function AdiathetesCard({ data }: { data: TheseisStats }) {
     </motion.div>
   );
 }
+
+/* ---------------------------------------------------------------------- */
+/* Προσόντα διοριστέων (proson_impact.json)                               */
+/* ---------------------------------------------------------------------- */
+export interface ProsonImpact {
+  total_appointed: number;
+  appointed_with_metapt: number;
+  metapt_pct: number;
+  appointed_with_didakt: number;
+  didakt_pct: number;
+  appointed_with_empeiria: number;
+  empeiria_pct: number;
+  appointed_with_xeni: number;
+  xeni_pct: number;
+  appointed_with_entop: number;
+  entop_pct: number;
+  entop_by_category: Record<string, number>;
+}
+
+export function ProsontaCard({ data }: { data: ProsonImpact }) {
+  const pct = (v: number) => v.toFixed(1).replace(".", ",");
+  const entop = data.entop_by_category;
+  const items = [
+    {
+      label: "Μεταπτυχιακό",
+      pct: data.metapt_pct,
+      text: `${formatNumber(data.appointed_with_metapt)} διοριστέοι είχαν μεταπτυχιακό τίτλο.`,
+    },
+    {
+      label: "Εντοπιότητα (Κωδ. 6 / 7)",
+      pct: data.entop_pct,
+      text: `${formatNumber(data.appointed_with_entop)} διοριστέοι είχαν μόρια εντοπιότητας (κωδ. 6: ${formatNumber(entop["6"] ?? 0)} · κωδ. 7: ${formatNumber(entop["7"] ?? 0)}).`,
+    },
+    {
+      label: "Επαγγελματική εμπειρία",
+      pct: data.empeiria_pct,
+      text: `${formatNumber(data.appointed_with_empeiria)} διοριστέοι αξιοποίησαν μόρια προϋπηρεσίας.`,
+    },
+    {
+      label: "Άριστη ξένη γλώσσα (C2)",
+      pct: data.xeni_pct,
+      text: `${formatNumber(data.appointed_with_xeni)} διοριστέοι είχαν άριστη γνώση ξένης γλώσσας.`,
+    },
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.55 }}
+      className="glass p-5 sm:p-8 rounded-2xl mb-8"
+    >
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-5">
+        <div>
+          <h3 className="text-lg sm:text-xl font-bold text-heading">
+            Η Δύναμη των Προσόντων: Πώς κρίθηκαν οι διορισμοί
+          </h3>
+          <p className="text-xs sm:text-sm text-muted mt-1 max-w-2xl">
+            Ανάλυση των πρόσθετων μορίων και προνομίων στους{" "}
+            {formatNumber(data.total_appointed)} διοριστέους του διαγωνισμού.
+          </p>
+        </div>
+        <span className="text-xs font-mono text-primary-text px-2.5 py-1 rounded-full bg-primary/15 border border-primary/50 self-start whitespace-nowrap">
+          Ανάλυση Προσόντων
+        </span>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {items.map((k) => (
+          <div key={k.label} className="p-4 rounded-xl bg-surface border border-line flex flex-col gap-2">
+            <div className="text-[11px] uppercase tracking-wider text-muted font-semibold">{k.label}</div>
+            <div className="text-2xl font-bold font-mono text-heading">{pct(k.pct)}%</div>
+            <div className="h-1.5 w-full rounded-full bg-surface-strong overflow-hidden">
+              <div className="h-full rounded-full bg-primary" style={{ width: `${k.pct}%` }} />
+            </div>
+            <div className="text-xs text-muted">{k.text}</div>
+          </div>
+        ))}
+      </div>
+    </motion.div>
+  );
+}

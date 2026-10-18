@@ -1,0 +1,17 @@
+{
+  "total_appointed": 2407,
+  "appointed_with_metapt": 992,
+  "metapt_pct": 41.2,
+  "appointed_with_didakt": 6,
+  "didakt_pct": 0.2,
+  "appointed_with_empeiria": 2211,
+  "empeiria_pct": 91.9,
+  "appointed_with_xeni": 1151,
+  "xeni_pct": 47.8,
+  "appointed_with_entop": 609,
+  "entop_pct": 25.3,
+  "entop_by_category": {
+    "6": 469,
+    "7": 140
+  }
+}

@@ -16,7 +16,7 @@ import sys
 import json
 import shutil
 from pathlib import Path
-from collections import defaultdict
+from collections import Counter, defaultdict
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -28,7 +28,8 @@ CHUNK_SIZE = 1000
 
 # Generated αρχεία που ξαναγράφονται σε κάθε εκτέλεση (τα geo/positions όχι)
 GENERATED_FILES = ["search_index.json", "chunk_index.json", "eidikotites_stats.json",
-                   "global_stats.json", "eidikotites_index.json", "theseis_stats.json"]
+                   "global_stats.json", "eidikotites_index.json", "theseis_stats.json",
+                   "proson_impact.json"]
 GENERATED_DIRS = ["chunks", "eidikotites"]
 
 
@@ -184,6 +185,40 @@ def main():
         json.dumps(theseis_stats, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"  ✓ theseis_stats.json: {theseis_stats['adiathetes']} αδιάθετες από "
           f"{theseis_stats['total_theseis']} θέσεις")
+
+    # ============ 4γ. ΠΡΟΣΟΝΤΑ ΔΙΟΡΙΣΤΕΩΝ ============
+    # Ίδια δομή με το proson_impact.json του 2ΓΒ/2026. Μία εγγραφή ανά διοριστέο.
+    print("\nΔημιουργία proson_impact.json (προσόντα διοριστέων)...")
+    appointed = [r for r in all_data if r.get("dioristike")]
+    n_app = len(appointed)
+
+    def pct(n):
+        return round(n / n_app * 100, 1) if n_app else 0
+
+    with_metapt = sum(1 for r in appointed
+                      if r.get("metaptyxiako") or r.get("enigaios_metaptyxiakos"))
+    with_didakt = sum(1 for r in appointed if r.get("didaktoriko"))
+    with_empeiria = sum(1 for r in appointed if (r.get("monades_empeirias") or 0) > 0)
+    with_xeni = sum(1 for r in appointed if r.get("xeni_glossa"))
+    with_entop = [r for r in appointed if has_entopiotita(r)]
+    proson_impact = {
+        "total_appointed": n_app,
+        "appointed_with_metapt": with_metapt,
+        "metapt_pct": pct(with_metapt),
+        "appointed_with_didakt": with_didakt,
+        "didakt_pct": pct(with_didakt),
+        "appointed_with_empeiria": with_empeiria,
+        "empeiria_pct": pct(with_empeiria),
+        "appointed_with_xeni": with_xeni,
+        "xeni_pct": pct(with_xeni),
+        "appointed_with_entop": len(with_entop),
+        "entop_pct": pct(len(with_entop)),
+        "entop_by_category": dict(sorted(
+            Counter(r["kod_entopiotitas"] for r in with_entop).items())),
+    }
+    (WEB_DATA / "proson_impact.json").write_text(
+        json.dumps(proson_impact, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"  ✓ proson_impact.json {proson_impact}")
 
     # ============ 5. EIDIKOTITES INDEX ============
     # count = μοναδικοί υποψήφιοι του πίνακα (όχι εγγραφές ανά ομάδα προσόντων)

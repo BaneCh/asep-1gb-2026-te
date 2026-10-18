@@ -4,7 +4,14 @@ import { motion } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
 import { formatNumber, formatVathmologia } from "@/lib/utils";
-import { VaseisCard, AdiathetesCard, type VasiRow, type TheseisStats } from "@/components/stats/ExtraStats";
+import {
+  VaseisCard,
+  AdiathetesCard,
+  ProsontaCard,
+  type VasiRow,
+  type TheseisStats,
+  type ProsonImpact,
+} from "@/components/stats/ExtraStats";
 import {
   BarChart,
   Bar,
@@ -21,6 +28,7 @@ import {
 interface StatsData {
   vaseis: VasiRow[];
   theseis: TheseisStats;
+  proson: ProsonImpact;
   global: {
     total_candidates: number;
     total_dioristoi: number;
@@ -538,6 +546,9 @@ export default function StatsPage() {
             ))}
           </div>
         </motion.div>
+
+        {/* Προσόντα διοριστέων */}
+        <ProsontaCard data={data.proson} />
       </div>
     </main>
   );
