@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, useRef, useMemo } from "react";
 import Link from "next/link";
 import GreeceMap from "@/components/maps/GreeceMap";
+import PositionsChart from "@/components/maps/PositionsChart";
 import { formatNumber } from "@/lib/utils";
 import {
   PERIFEREIES_MAPPING,
@@ -265,6 +266,13 @@ export default function XartisPage() {
             onSelectPerifereia={handleSelect}
           />
         </motion.div>
+
+        {/* Θέσεις ανά περιφέρεια — ακολουθεί το φίλτρο ειδικότητας */}
+        <PositionsChart
+          positions={filteredPositions}
+          eidikotita={eidikotitaFilter}
+          onSelect={handleSelect}
+        />
 
         {/* Selected region details container with smooth scroll ref */}
         <div ref={resultsRef} style={{ scrollMarginTop: "100px" }}>
