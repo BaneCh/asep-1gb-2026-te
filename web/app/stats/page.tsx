@@ -2,13 +2,10 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
-import Link from "next/link";
 import { formatNumber, formatVathmologia } from "@/lib/utils";
 import {
-  VaseisCard,
   AdiathetesCard,
   ProsontaCard,
-  type VasiRow,
   type TheseisStats,
   type ProsonImpact,
 } from "@/components/stats/ExtraStats";
@@ -26,7 +23,6 @@ import {
 } from "recharts";
 
 interface StatsData {
-  vaseis: VasiRow[];
   theseis: TheseisStats;
   proson: ProsonImpact;
   global: {
@@ -40,8 +36,6 @@ interface StatsData {
     me_metaptyxiako: number;
   };
   topByCount: any[];
-  topByDioristoi: any[];
-  topByPososto: any[];
   topByAvg: any[];
   sunburst: any;
 }
@@ -149,15 +143,6 @@ export default function StatsPage() {
     }
     return map;
   }, [eidikotitesIndex]);
-
-  function getDisplayName(slug: string): string {
-    if (slugToGreekMap[slug]) return slugToGreekMap[slug];
-    return slug
-      .replace(/^te-/, "ΤΕ ")
-      .replace(/-eid-te-/, " ΕΙΔ. ")
-      .replace(/-/g, " ")
-      .toUpperCase();
-  }
 
   // Σωστός υπολογισμός τίτλων σπουδών
   const titloiData = useMemo(() => {
@@ -380,107 +365,7 @@ export default function StatsPage() {
           </div>
         </motion.div>
 
-        {/* Grid: Top Διοριστέοι + Top Ποσοστό */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 sm:mb-12">
-          {/* Top 15 ανά διοριστέους */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="glass p-5 sm:p-8 rounded-2xl flex flex-col"
-          >
-            <h3 className="text-lg sm:text-xl font-bold text-heading mb-6 flex items-center justify-between">
-              <span>Top 15 ανά διοριστέους</span>
-              <span className="text-xs font-mono text-primary-text px-2.5 py-1 rounded-full bg-primary/15 border border-primary/50">
-                Θέσεις
-              </span>
-            </h3>
-
-            <div className="space-y-2.5">
-              {data.topByDioristoi.map((e, i) => {
-                const greekName = getDisplayName(e.slug);
-                return (
-                  <Link
-                    key={e.slug}
-                    href={`/eidikotita/${e.slug}`}
-                    className="flex items-center justify-between p-3 rounded-xl bg-surface border border-line hover:border-primary hover:bg-primary/10 transition-all duration-200 group no-underline"
-                  >
-                    <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 pr-3">
-                      <span
-                        className={`w-5 sm:w-6 text-xs font-mono font-bold flex-shrink-0 ${
-                          i < 3 ? "text-primary-text" : "text-dim"
-                        }`}
-                      >
-                        {String(i + 1).padStart(2, "0")}.
-                      </span>
-                      <span
-                        className="text-xs sm:text-sm font-medium text-body group-hover:text-heading truncate"
-                        title={greekName}
-                      >
-                        {greekName}
-                      </span>
-                    </div>
-                    <span className="font-mono font-bold text-xs sm:text-sm text-primary-text flex-shrink-0 bg-surface px-2.5 py-1 rounded-md border border-line">
-                      {formatNumber(e.dioristoi)}
-                    </span>
-                  </Link>
-                );
-              })}
-            </div>
-          </motion.div>
-
-          {/* Top 15 ανά ποσοστό επιτυχίας */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="glass p-5 sm:p-8 rounded-2xl flex flex-col"
-          >
-            <h3 className="text-lg sm:text-xl font-bold text-heading mb-6 flex items-center justify-between">
-              <span>Top 15 ανά ποσοστό επιτυχίας</span>
-              <span className="text-xs font-mono text-success px-2.5 py-1 rounded-full bg-success/10 border border-success/40">
-                Ποσοστό %
-              </span>
-            </h3>
-
-            <div className="space-y-2.5">
-              {data.topByPososto.map((e, i) => {
-                const greekName = getDisplayName(e.slug);
-                return (
-                  <Link
-                    key={e.slug}
-                    href={`/eidikotita/${e.slug}`}
-                    className="flex items-center justify-between p-3 rounded-xl bg-surface border border-line hover:border-success hover:bg-success/10 transition-all duration-200 group no-underline"
-                  >
-                    <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 pr-3">
-                      <span
-                        className={`w-5 sm:w-6 text-xs font-mono font-bold flex-shrink-0 ${
-                          i < 3 ? "text-success" : "text-dim"
-                        }`}
-                      >
-                        {String(i + 1).padStart(2, "0")}.
-                      </span>
-                      <span
-                        className="text-xs sm:text-sm font-medium text-body group-hover:text-heading truncate"
-                        title={greekName}
-                      >
-                        {greekName}
-                      </span>
-                    </div>
-                    <span className="font-mono font-bold text-xs sm:text-sm text-success flex-shrink-0 bg-surface px-2 py-1 rounded-md border border-line">
-                      {e.pososto.toFixed(1).replace(".", ",")}%
-                    </span>
-                  </Link>
-                );
-              })}
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Βάσεις ανά ειδικότητα */}
-        <VaseisCard rows={data.vaseis} />
-
-        {/* Αδιάθετες θέσεις */}
+        {/* Κενές θέσεις */}
         <AdiathetesCard data={data.theseis} />
 
         {/* Κατανομή Τίτλων Σπουδών (Mobile-Friendly Donut) */}

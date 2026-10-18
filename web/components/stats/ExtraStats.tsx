@@ -3,191 +3,37 @@
 import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { formatNumber, formatVathmologia } from "@/lib/utils";
+import { formatNumber } from "@/lib/utils";
+import { PERIFEREIES_MAPPING, REGION_TITLE_MAP, unitInRegion } from "@/lib/regions";
 
 // Στατιστικά της σελίδας /stats που υπολογίζονται στο scripts/optimize_data.py
-// (eidikotites_stats.json → vasi, theseis_stats.json) και ελέγχονται από το
-// scripts/validate.py.
+// (theseis_stats.json, proson_impact.json) και ελέγχονται από το scripts/validate.py.
 
-export interface VasiRow {
-  slug: string;
-  name: string;
-  vasi: number;
-  dioristoi: number;
-}
-
-interface TheseisRow {
-  name: string;
+interface KenosKodikos {
+  kod: string;
   theseis: number;
   filled: number;
   adiathetes: number;
-  kodikoi: number;
-  kodikoi_adiathetoi: number;
+  eidikotita: string;
+  foreas: string;
+  perifereia: string;
+  dimos: string;
+  titloi: string;
+  prosonta: string;
 }
 
+// Στα δεδομένα το πεδίο λέγεται «adiathetes»· στη σελίδα εμφανίζεται ως «κενές».
 export interface TheseisStats {
   total_theseis: number;
   filled: number;
   adiathetes: number;
   kodikoi_adiathetoi: number;
-  by_eidikotita: TheseisRow[];
-  by_perifereia: TheseisRow[];
-}
-
-function SortButton({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${
-        active ? "bg-primary text-black" : "text-muted hover:text-heading"
-      }`}
-    >
-      {children}
-    </button>
-  );
+  kodikoi: KenosKodikos[];
 }
 
 /* ---------------------------------------------------------------------- */
-/* Βάσεις ανά ειδικότητα                                                  */
+/* Κενές θέσεις                                                           */
 /* ---------------------------------------------------------------------- */
-export function VaseisCard({ rows }: { rows: VasiRow[] }) {
-  const [sort, setSort] = useState<"desc" | "asc" | "alpha">("desc");
-
-  const sorted = useMemo(() => {
-    const r = [...rows];
-    if (sort === "desc") r.sort((a, b) => b.vasi - a.vasi);
-    else if (sort === "asc") r.sort((a, b) => a.vasi - b.vasi);
-    else r.sort((a, b) => a.name.localeCompare(b.name, "el"));
-    return r;
-  }, [rows, sort]);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.45 }}
-      className="glass p-5 sm:p-8 rounded-2xl mb-8"
-    >
-      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
-        <div>
-          <h3 className="text-lg sm:text-xl font-bold text-heading">Βάσεις ανά ειδικότητα</h3>
-          <p className="text-xs sm:text-sm text-muted mt-1 max-w-2xl">
-            Βάση = η χαμηλότερη βαθμολογία με την οποία έγινε διορισμός μέσω του πίνακα
-            κατάταξης. Λόγω προτιμήσεων θέσεων και εντοπιότητας, υποψήφιοι με
-            υψηλότερη βαθμολογία δεν διορίστηκαν απαραίτητα.
-          </p>
-        </div>
-        <div className="flex flex-shrink-0 rounded-lg border border-line bg-surface p-1 self-start">
-          <SortButton active={sort === "desc"} onClick={() => setSort("desc")}>
-            Υψηλότερη
-          </SortButton>
-          <SortButton active={sort === "asc"} onClick={() => setSort("asc")}>
-            Χαμηλότερη
-          </SortButton>
-          <SortButton active={sort === "alpha"} onClick={() => setSort("alpha")}>
-            Α–Ω
-          </SortButton>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-2.5">
-        {sorted.map((e, i) => (
-          <Link
-            key={e.slug}
-            href={`/eidikotita/${e.slug}`}
-            className="flex items-center justify-between gap-3 p-3 rounded-xl bg-surface border border-line hover:border-primary hover:bg-primary/10 transition-all duration-200 group no-underline"
-          >
-            <div className="flex items-center gap-2.5 min-w-0">
-              <span className="w-6 text-xs font-mono font-bold text-dim flex-shrink-0">
-                {String(i + 1).padStart(2, "0")}.
-              </span>
-              <span
-                className="text-xs sm:text-sm font-medium text-body group-hover:text-heading truncate"
-                title={e.name}
-              >
-                {e.name}
-              </span>
-            </div>
-            <div className="flex items-center gap-3 flex-shrink-0">
-              <span className="hidden sm:inline text-[11px] text-dim whitespace-nowrap">
-                {formatNumber(e.dioristoi)} {e.dioristoi === 1 ? "διοριστέος" : "διοριστέοι"}
-              </span>
-              <span className="font-mono font-bold text-xs sm:text-sm text-heading bg-surface px-2.5 py-1 rounded-md border border-line">
-                {formatVathmologia(e.vasi)}
-              </span>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </motion.div>
-  );
-}
-
-/* ---------------------------------------------------------------------- */
-/* Αδιάθετες θέσεις                                                       */
-/* ---------------------------------------------------------------------- */
-function UnfilledList({
-  title,
-  rows,
-  limit,
-}: {
-  title: string;
-  rows: TheseisRow[];
-  limit?: number;
-}) {
-  const [showAll, setShowAll] = useState(false);
-  const withUnfilled = rows.filter((r) => r.adiathetes > 0);
-  const visible = limit && !showAll ? withUnfilled.slice(0, limit) : withUnfilled;
-
-  return (
-    <div className="flex flex-col">
-      <h4 className="text-sm font-semibold text-heading mb-3">
-        {title} <span className="text-muted font-normal">({withUnfilled.length})</span>
-      </h4>
-      <div className="space-y-2.5">
-        {visible.map((r) => {
-          const pct = r.theseis ? (r.filled / r.theseis) * 100 : 0;
-          return (
-            <div key={r.name} className="p-3 rounded-xl bg-surface border border-line">
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-xs sm:text-sm font-medium text-body truncate" title={r.name}>
-                  {r.name}
-                </span>
-                <span className="font-mono font-bold text-xs sm:text-sm text-heading flex-shrink-0">
-                  {formatNumber(r.adiathetes)}
-                  <span className="text-dim font-normal"> / {formatNumber(r.theseis)}</span>
-                </span>
-              </div>
-              {/* μπάρα: καλυμμένο ποσοστό */}
-              <div className="mt-2 h-1.5 w-full rounded-full bg-surface-strong overflow-hidden">
-                <div className="h-full rounded-full bg-primary" style={{ width: `${pct}%` }} />
-              </div>
-            </div>
-          );
-        })}
-      </div>
-      {limit && withUnfilled.length > limit && (
-        <button
-          type="button"
-          onClick={() => setShowAll((v) => !v)}
-          className="btn-outline mt-3 self-start !px-4 !py-2 !text-xs"
-        >
-          {showAll ? "Λιγότερες" : `Όλες (${withUnfilled.length})`}
-        </button>
-      )}
-    </div>
-  );
-}
-
 export function AdiathetesCard({ data }: { data: TheseisStats }) {
   return (
     <motion.div
@@ -196,18 +42,17 @@ export function AdiathetesCard({ data }: { data: TheseisStats }) {
       transition={{ delay: 0.5 }}
       className="glass p-5 sm:p-8 rounded-2xl mb-8"
     >
-      <h3 className="text-lg sm:text-xl font-bold text-heading">Αδιάθετες θέσεις</h3>
+      <h3 className="text-lg sm:text-xl font-bold text-heading">Κενές θέσεις</h3>
       <p className="text-xs sm:text-sm text-muted mt-1 mb-5 max-w-2xl">
-        Θέσεις της προκήρυξης για τις οποίες δεν προέκυψε διοριστέος. Ο αριθμός δείχνει
-        αδιάθετες / συνολικές θέσεις· η μπάρα το ποσοστό που καλύφθηκε.
+        Θέσεις της προκήρυξης για τις οποίες δεν προέκυψε διοριστέος.
       </p>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
         {[
           { label: "Θέσεις προκήρυξης", value: data.total_theseis },
           { label: "Καλύφθηκαν", value: data.filled },
-          { label: "Αδιάθετες", value: data.adiathetes },
-          { label: "Κωδικοί με αδιάθετες", value: data.kodikoi_adiathetoi },
+          { label: "Κενές", value: data.adiathetes },
+          { label: "Κωδικοί με κενές", value: data.kodikoi_adiathetoi },
         ].map((k) => (
           <div key={k.label} className="p-3 rounded-xl bg-surface border border-line">
             <div className="text-[11px] uppercase tracking-wider text-muted">{k.label}</div>
@@ -216,11 +61,175 @@ export function AdiathetesCard({ data }: { data: TheseisStats }) {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <UnfilledList title="Ανά ειδικότητα" rows={data.by_eidikotita} />
-        <UnfilledList title="Ανά περιφερειακή ενότητα" rows={data.by_perifereia} limit={10} />
-      </div>
+      <KenesFilter kodikoi={data.kodikoi || []} />
     </motion.div>
+  );
+}
+
+/* Φίλτρα κενών θέσεων (όπως στο 2ΓΒ/2026 /kenes-theseis). Αποτελέσματα εμφανίζονται
+   μόνο όταν ο χρήστης επιλέξει/γράψει κάτι. */
+function normalizeGr(s: string): string {
+  return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+}
+
+const RESULTS_LIMIT = 80;
+
+function KenesFilter({ kodikoi }: { kodikoi: KenosKodikos[] }) {
+  const [q, setQ] = useState("");
+  const [area, setArea] = useState(""); // "R:<geoName>" για περιφέρεια ή όνομα ενότητας
+  const [eid, setEid] = useState("");
+
+  // Περιφέρειες → περιφερειακές ενότητες με κενές θέσεις (για optgroups)
+  const areaGroups = useMemo(() => {
+    const units = new Set(kodikoi.map((k) => k.perifereia));
+    return Object.entries(PERIFEREIES_MAPPING)
+      .map(([geo, list]) => ({
+        geo,
+        title: REGION_TITLE_MAP[geo] || geo,
+        units: list.filter((u) => units.has(u)).sort((a, b) => a.localeCompare(b, "el")),
+      }))
+      .filter((g) => g.units.length)
+      .sort((a, b) => a.title.localeCompare(b.title, "el"));
+  }, [kodikoi]);
+
+  const eidikotites = useMemo(
+    () => Array.from(new Set(kodikoi.map((k) => k.eidikotita))).sort((a, b) => a.localeCompare(b, "el")),
+    [kodikoi]
+  );
+
+  const active = !!(q.trim() || area || eid);
+
+  const results = useMemo(() => {
+    if (!active) return [];
+    const t = normalizeGr(q.trim());
+    return kodikoi.filter((k) => {
+      const matchQ =
+        !t ||
+        k.kod.includes(t) ||
+        [k.foreas, k.eidikotita, k.dimos, k.perifereia].some((f) => normalizeGr(f).includes(t));
+      const matchArea = !area
+        ? true
+        : area.startsWith("R:")
+          ? unitInRegion(k.perifereia, area.slice(2))
+          : k.perifereia === area;
+      const matchEid = !eid || k.eidikotita === eid;
+      return matchQ && matchArea && matchEid;
+    });
+  }, [kodikoi, q, area, eid, active]);
+
+  const kenes = results.reduce((s, k) => s + k.adiathetes, 0);
+  const field =
+    "w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line text-sm text-body focus:outline-none focus:border-primary";
+
+  return (
+    <div className="pt-6 border-t border-line">
+      <h4 className="text-sm font-semibold text-heading mb-1">Αναζήτηση κενών θέσεων</h4>
+      <p className="text-xs text-muted mb-3">
+        Διάλεξε περιοχή ή ειδικότητα, ή γράψε κωδικό, φορέα ή δήμο, για να δεις τις θέσεις.
+      </p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <input
+          type="text"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Κωδικός, φορέας, δήμος…"
+          aria-label="Αναζήτηση με κωδικό, φορέα ή δήμο"
+          className={`${field} placeholder:text-dim`}
+        />
+        <select value={area} onChange={(e) => setArea(e.target.value)} aria-label="Περιοχή" className={field}>
+          <option value="">Όλες οι περιοχές</option>
+          {areaGroups.map((g) => (
+            <optgroup key={g.geo} label={g.title}>
+              <option value={`R:${g.geo}`}>Όλη η {g.title}</option>
+              {g.units.map((u) => (
+                <option key={u} value={u}>
+                  {u}
+                </option>
+              ))}
+            </optgroup>
+          ))}
+        </select>
+        <select value={eid} onChange={(e) => setEid(e.target.value)} aria-label="Ειδικότητα" className={field}>
+          <option value="">Όλες οι ειδικότητες</option>
+          {eidikotites.map((e) => (
+            <option key={e} value={e}>
+              {e}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {active && (
+        <>
+          <div className="flex items-center justify-between gap-3 text-xs text-muted mt-3">
+            <span>
+              Βρέθηκαν <strong className="text-heading">{formatNumber(results.length)}</strong>{" "}
+              {results.length === 1 ? "κωδικός" : "κωδικοί"} με{" "}
+              <strong className="text-heading">{formatNumber(kenes)}</strong>{" "}
+              {kenes === 1 ? "κενή θέση" : "κενές θέσεις"}.
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                setQ("");
+                setArea("");
+                setEid("");
+              }}
+              className="text-primary-text underline-offset-2 hover:underline flex-shrink-0"
+            >
+              Καθαρισμός
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-4">
+            {results.slice(0, RESULTS_LIMIT).map((k) => (
+              <Link
+                key={k.kod}
+                href={`/thesi/${k.kod}`}
+                className="block p-4 rounded-xl bg-surface border border-line hover:border-primary hover:bg-primary/10 transition-all duration-200 group no-underline"
+              >
+                <div className="flex items-center justify-between gap-3 flex-wrap">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="font-mono font-bold text-base text-heading">#{k.kod}</span>
+                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-primary/15 border border-primary/50 text-primary-text font-semibold">
+                      {k.adiathetes} {k.adiathetes === 1 ? "κενή θέση" : "κενές θέσεις"}
+                    </span>
+                  </div>
+                  <span className="text-[11px] text-dim">
+                    Προκηρύχθηκαν {k.theseis} · Διορίστηκαν {k.filled}
+                  </span>
+                </div>
+                <div className="text-sm font-medium text-body group-hover:text-heading mt-2">{k.foreas}</div>
+                <div className="text-xs text-muted mt-0.5">{k.eidikotita}</div>
+                <div className="text-xs text-muted mt-0.5">
+                  {k.perifereia}
+                  {k.dimos ? ` · Δήμος ${k.dimos}` : ""}
+                </div>
+                {(k.titloi || k.prosonta) && (
+                  <div className="text-[11px] text-dim mt-2">
+                    Κωδ. τίτλων: {k.titloi || "—"}
+                    {k.prosonta ? ` · Κωδ. πρόσθετων προσόντων: ${k.prosonta}` : ""}
+                  </div>
+                )}
+              </Link>
+            ))}
+          </div>
+
+          {results.length === 0 && (
+            <p className="text-sm text-muted text-center py-6">
+              Δεν βρέθηκαν κενές θέσεις με αυτά τα κριτήρια.
+            </p>
+          )}
+          {results.length > RESULTS_LIMIT && (
+            <p className="text-xs text-muted text-center py-3">
+              Εμφανίζονται οι πρώτοι {RESULTS_LIMIT} από {formatNumber(results.length)} κωδικούς. Περιόρισε
+              την αναζήτηση με τα φίλτρα.
+            </p>
+          )}
+        </>
+      )}
+    </div>
   );
 }
 

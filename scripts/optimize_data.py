@@ -253,6 +253,16 @@ def main():
                                   if filled_by_kod.get(p["kod_thesis"], 0) < p["theseis"]),
         "by_eidikotita": bucket(lambda p: specialty_label(p["eidikotita"])),
         "by_perifereia": bucket(lambda p: p["perifereia"]),
+        # Ένας κωδικός ανά γραμμή, μόνο όσοι έχουν κενές θέσεις (φίλτρα σελίδας Στατιστικά)
+        "kodikoi": sorted(
+            ({"kod": p["kod_thesis"], "theseis": p["theseis"],
+              "filled": min(filled_by_kod.get(p["kod_thesis"], 0), p["theseis"]),
+              "adiathetes": p["theseis"] - min(filled_by_kod.get(p["kod_thesis"], 0), p["theseis"]),
+              "eidikotita": specialty_label(p["eidikotita"]), "foreas": p["foreas"],
+              "perifereia": p["perifereia"], "dimos": p.get("dimos", ""),
+              "titloi": p.get("titloi", ""), "prosonta": p.get("prosonta", "")}
+             for p in positions if filled_by_kod.get(p["kod_thesis"], 0) < p["theseis"]),
+            key=lambda x: (-x["adiathetes"], int(x["kod"]))),
     }
     (WEB_DATA / "theseis_stats.json").write_text(
         json.dumps(theseis_stats, ensure_ascii=False, indent=2), encoding="utf-8")

@@ -25,7 +25,7 @@ export async function GET() {
       value: e.count,
     }));
 
-  // Top ειδικότητες ανά διοριστέους
+  // Ανά ειδικότητα: σύνολα για τα παρακάτω top
   const eidArray = Object.entries(eidStats).map(([slug, s]: [string, any]) => ({
     slug,
     count: s.count,
@@ -34,16 +34,6 @@ export async function GET() {
     avg_vath: s.avg_vath,
     max_vath: s.max_vath,
   }));
-
-  const topByDioristoi = [...eidArray]
-    .sort((a, b) => b.dioristoi - a.dioristoi)
-    .slice(0, 15);
-
-  // Top ειδικότητες ανά ποσοστό επιτυχίας
-  const topByPososto = [...eidArray]
-    .filter((e) => e.count >= 50) // ignore very small
-    .sort((a, b) => b.pososto - a.pososto)
-    .slice(0, 15);
 
   // Top ειδικότητες ανά μέση βαθμολογία
   const topByAvg = [...eidArray]
@@ -67,34 +57,17 @@ export async function GET() {
       })),
   };
 
-  // Βάση (χαμηλότερη βαθμολογία διοριστέου) ανά ειδικότητα — όλες, από την υψηλότερη
-  const nameBySlug: Record<string, string> = Object.fromEntries(
-    (index as { slug: string; eidikotita: string }[]).map((e) => [e.slug, e.eidikotita])
-  );
-  const vaseis = Object.entries(eidStats as Record<string, { vasi: number | null; dioristoi: number }>)
-    .map(([slug, s]) => ({
-      slug,
-      name: nameBySlug[slug] || slug,
-      vasi: s.vasi,
-      dioristoi: s.dioristoi,
-    }))
-    .filter((e): e is typeof e & { vasi: number } => e.vasi != null)
-    .sort((a, b) => b.vasi - a.vasi);
-
-  // Καλυμμένες / αδιάθετες θέσεις (ανά ειδικότητα ΦΕΚ και περιφερειακή ενότητα)
+  // Καλυμμένες / κενές θέσεις (ανά ειδικότητα ΦΕΚ και περιφερειακή ενότητα)
   const theseis = getJson("theseis_stats.json");
 
   // Προσόντα των διοριστέων (μεταπτυχιακό, εντοπιότητα, εμπειρία, ξένη γλώσσα)
   const proson = getJson("proson_impact.json");
 
   return NextResponse.json({
-    vaseis,
     theseis,
     proson,
     global: globalStats,
     topByCount,
-    topByDioristoi,
-    topByPososto,
     topByAvg,
     sunburst: sunburstData,
   });
