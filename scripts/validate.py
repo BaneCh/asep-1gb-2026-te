@@ -145,6 +145,19 @@ def main():
           and all(0 <= pi[k] <= len(flagged) for k in pi if k.startswith("appointed_with_")),
           f"proson_impact: {pi['total_appointed']:,} διοριστέοι, {n_entop:,} με εντοπιότητα")
 
+    print("\n[3γ] Σειρά αναπλήρωσης (epilaxontes.json)")
+    ep = load(WEB / "epilaxontes.json")
+    flagged_am = {r["am"] for r in flagged}
+    check(not (set(ep["candidates"]) & flagged_am), "κανένας διοριστέος στη σειρά αναπλήρωσης")
+    check(set(ep["vasi"]) == set(filled), f"βάση για κάθε καλυμμένη θέση ({len(ep['vasi']):,})")
+    queues = defaultdict(list)
+    for am, rows in ep["candidates"].items():
+        for kod, pref, score, ahead in rows:
+            queues[kod].append(ahead)
+    bad_q = [k for k, a in queues.items() if sorted(a) != list(range(len(a)))]
+    check(not bad_q, f"κάθε θέση έχει σειρά 1, 2, 3… χωρίς κενά/διπλά ({len(queues):,} θέσεις) "
+          f"{bad_q[:5] if bad_q else ''}")
+
     print("\n[4] Καμία ειδικότητα/θέση χωρίς αντιστοίχιση")
     table_codes = defaultdict(set)
     for r in candidates:

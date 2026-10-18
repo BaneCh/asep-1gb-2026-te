@@ -29,7 +29,7 @@ CHUNK_SIZE = 1000
 # Generated αρχεία που ξαναγράφονται σε κάθε εκτέλεση (τα geo/positions όχι)
 GENERATED_FILES = ["search_index.json", "chunk_index.json", "eidikotites_stats.json",
                    "global_stats.json", "eidikotites_index.json", "theseis_stats.json",
-                   "proson_impact.json"]
+                   "proson_impact.json", "epilaxontes.json"]
 GENERATED_DIRS = ["chunks", "eidikotites"]
 
 
@@ -51,6 +51,79 @@ def has_entopiotita(r: dict) -> bool:
 
 def round2(v):
     return round(v, 2) if v is not None else None
+
+
+def split_codes(s) -> list[str]:
+    return [x for x in re.split(r"[\s,-]+", s or "") if x]
+
+
+def build_epilaxontes(all_data: list, positions: list):
+    """epilaxontes.json: για κάθε μη διοριστέο, οι θέσεις που δήλωσε και καλύφθηκαν
+    από άλλους, με τη βάση της θέσης και πόσοι μη διοριστέοι προηγούνται του.
+
+    - Κάθε γραμμή καλύπτει τους κωδικούς «ΘΕΣΕΙΣ ΙΔΙΑΣ ΟΜΑΔΑΣ»· η γραμμή με
+      εντοπιότητα (άλλη βαθμολογία) μόνο τους κωδικούς «ΚΩΔ. ΘΕΣΗΣ ΓΙΑ ΤΗΝ ΕΝΤΟΠΙΟΤΗΤΑ».
+    - Για κάθε (υποψήφιος, θέση) κρατιέται η καλύτερη γραμμή: μεγαλύτερη
+      βαθμολογία, μετά μικρότερο Α/Α (ο Α/Α του ΑΣΕΠ λύνει τις ισοβαθμίες μέσα
+      στον πίνακα). Θέσεις κοινές σε πολλούς πίνακες συγκρίνονται με τη βαθμολογία.
+    - «Προηγούνται» = μη διοριστέοι που δήλωσαν τη θέση, έχουν τα προσόντα της
+      και είναι πριν από τον υποψήφιο. Είναι πραγματική μέτρηση, όχι εκτίμηση·
+      η πραγματική σειρά αναπλήρωσης μπορεί να διαφέρει λόγω ειδικών κατηγοριών
+      (δεν δημοσιεύονται για τους μη διοριστέους) και πολλαπλών κενώσεων.
+    """
+    print("\nΔημιουργία epilaxontes.json (σειρά αναπλήρωσης)...")
+    best = {}  # (am, kod) -> (-score, aa)
+    for r in all_data:
+        if r.get("vathmologia") is None:
+            continue
+        codes = split_codes(r.get("kod_thesi_entop")) or split_codes(r.get("theseis_idias_omadas"))
+        key_val = (-r["vathmologia"], r["aa"])
+        for k in codes:
+            if (r["am"], k) not in best or key_val < best[(r["am"], k)]:
+                best[(r["am"], k)] = key_val
+
+    appointed_at = {r["am"]: r["thesi_diorismou"] for r in all_data if r.get("dioristike")}
+    prefs = {}
+    for r in all_data:
+        prefs.setdefault(r["am"], split_codes(r.get("protimiseis")))
+
+    # Βάση θέσης = χαμηλότερη βαθμολογία διοριστέου σε αυτή (για αυτή τη θέση)
+    vasi = {}
+    for am, k in appointed_at.items():
+        if (am, k) in best:
+            v = -best[(am, k)][0]
+            vasi[k] = min(vasi.get(k, v), v)
+
+    # Ουρά ανά θέση: μη διοριστέοι που τη δήλωσαν και έχουν τα προσόντα της
+    queue = defaultdict(list)
+    for am, pl in prefs.items():
+        if am in appointed_at:
+            continue
+        for k in dict.fromkeys(pl):
+            if k in vasi and (am, k) in best:
+                queue[k].append((best[(am, k)], am))
+    ahead = {}
+    for k, q in queue.items():
+        q.sort()
+        for i, (_, am) in enumerate(q):
+            ahead[(am, k)] = i
+
+    out = {}
+    for am, pl in prefs.items():
+        if am in appointed_at:
+            continue
+        rows = []
+        for n, k in enumerate(pl, 1):
+            if (am, k) in ahead and not any(k == x[0] for x in rows):
+                rows.append([k, n, -best[(am, k)][0], ahead[(am, k)]])
+        if rows:
+            out[am] = rows
+    (WEB_DATA / "epilaxontes.json").write_text(
+        json.dumps({"vasi": vasi, "candidates": out}, ensure_ascii=False, separators=(",", ":")),
+        encoding="utf-8")
+    n_rows = sum(len(v) for v in out.values())
+    print(f"  ✓ epilaxontes.json: {len(out):,} μη διοριστέοι, {n_rows:,} θέσεις, "
+          f"{(WEB_DATA / 'epilaxontes.json').stat().st_size / 1024 / 1024:.2f} MB")
 
 
 def main():
@@ -219,6 +292,9 @@ def main():
     (WEB_DATA / "proson_impact.json").write_text(
         json.dumps(proson_impact, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"  ✓ proson_impact.json {proson_impact}")
+
+    # ============ 4δ. ΣΕΙΡΑ ΑΝΑΠΛΗΡΩΣΗΣ (ΕΠΙΛΑΧΟΝΤΕΣ) ============
+    build_epilaxontes(all_data, positions)
 
     # ============ 5. EIDIKOTITES INDEX ============
     # count = μοναδικοί υποψήφιοι του πίνακα (όχι εγγραφές ανά ομάδα προσόντων)

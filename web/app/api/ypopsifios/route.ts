@@ -34,6 +34,42 @@ function findAllByAm(am: string): any[] {
   return matches;
 }
 
+// Σειρά αναπλήρωσης (scripts/optimize_data.py → epilaxontes.json). Φορτώνεται μία
+// φορά ανά instance: { vasi: {kod: βάση}, candidates: {am: [[kod, προτίμηση, βαθμός, προηγούνται]]} }
+let epilaxontesCache: {
+  vasi: Record<string, number>;
+  candidates: Record<string, [string, number, number, number][]>;
+} | null = null;
+let positionsCache: Record<string, any> | null = null;
+
+function getEpilaxontes(am: string) {
+  const dataDir = join(process.cwd(), "public", "data");
+  if (!epilaxontesCache) {
+    const p = join(dataDir, "epilaxontes.json");
+    if (!existsSync(p)) return [];
+    epilaxontesCache = JSON.parse(readFileSync(p, "utf-8"));
+  }
+  if (!positionsCache) {
+    const list = JSON.parse(readFileSync(join(dataDir, "positions.json"), "utf-8"));
+    positionsCache = Object.fromEntries(list.map((p: any) => [p.kod_thesis, p]));
+  }
+  const rows = epilaxontesCache!.candidates[am] || [];
+  return rows.map(([kod, pref, score, ahead]) => {
+    const p = positionsCache![kod] || {};
+    return {
+      kod,
+      pref,
+      score,
+      ahead,
+      vasi: epilaxontesCache!.vasi[kod],
+      theseis: p.theseis ?? null,
+      foreas: p.foreas ?? "",
+      perifereia: p.perifereia ?? "",
+      eidikotita: p.eidikotita ?? "",
+    };
+  });
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const am = searchParams.get("am");
@@ -52,5 +88,6 @@ export async function GET(request: Request) {
     primary: candidates[0],
     all: candidates,
     count: candidates.length,
+    epilaxontes: getEpilaxontes(String(candidates[0].am).replace(/\.0$/, "")),
   });
 }

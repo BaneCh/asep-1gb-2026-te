@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 import { formatVathmologia } from "@/lib/utils";
+import EpilaxontesCard, { type EpilaxonRow } from "@/components/ypopsifios/EpilaxontesCard";
 
 interface Candidate {
   am: string;
@@ -81,6 +82,7 @@ export default function ProfilePage() {
   const aaParam = searchParams?.get("aa");
 
   const [candidates, setCandidates] = useState<Candidate[]>([]);
+  const [epilaxontes, setEpilaxontes] = useState<EpilaxonRow[]>([]);
   const [activeIdx, setActiveIdx] = useState(0);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -99,6 +101,7 @@ export default function ProfilePage() {
       .then((data) => {
         if (data && data.all) {
           setCandidates(data.all);
+          setEpilaxontes(data.epilaxontes || []);
           // Αν έχουμε slug (+ προαιρετικά aa) param, διάλεξε αυτή την εγγραφή.
           // Ο ίδιος Α.Μ. μπορεί να υπάρχει πολλές φορές στον ίδιο πίνακα
           // (μία ανά ομάδα προσόντων), γι' αυτό το aa ξεχωρίζει την εγγραφή.
@@ -383,6 +386,9 @@ export default function ProfilePage() {
 
           <StatBox label="Σειρά" value={`#${candidate.aa}`} delay={400} />
         </div>
+
+        {/* Σειρά αναπλήρωσης — μόνο για μη διοριστέους */}
+        {!isDioristaios && <EpilaxontesCard rows={epilaxontes} />}
 
         <h2
           className="font-display"
