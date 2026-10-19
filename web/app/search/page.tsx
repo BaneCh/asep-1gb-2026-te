@@ -103,7 +103,7 @@ export default function SearchPage() {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="π.χ. 18663 ή ΠΑΠΑΓΟΡΑ"
+              placeholder="π.χ. 18663 ή ΠΑΠΑΔΟΠΟΥΛΟΣ"
               style={{
                 width: "100%",
                 padding: "20px 24px",
