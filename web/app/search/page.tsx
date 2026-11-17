@@ -88,7 +88,10 @@ export default function SearchPage() {
               fontSize: "1.1rem",
             }}
           >
-            Ψάξε με Α.Μ. αίτησης ή Επώνυμο.
+            Ψάξε με Α.Μ. αίτησης ή Επώνυμο.{" "}
+            <Link href="/foreis" style={{ color: "var(--primary-text)" }}>
+              Ψάχνεις φορέα (δήμο, υπουργείο…); →
+            </Link>
           </p>
 
           <div

@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { href: "/", label: "Αρχική" },
   { href: "/xartis", label: "Χάρτης" },
   { href: "/search", label: "Αναζήτηση" },
+  { href: "/foreis", label: "Φορείς" },
   { href: "/stats", label: "Στατιστικά" },
   { href: "/about", label: "Σχετικά" },
 ];

@@ -6,6 +6,7 @@ import Link from "next/link";
 import GreeceMap from "@/components/maps/GreeceMap";
 import PositionsChart from "@/components/maps/PositionsChart";
 import { formatNumber } from "@/lib/utils";
+import { foreasMatches, mainForeas } from "@/lib/foreis";
 import {
   PERIFEREIES_MAPPING,
   REGION_TITLE_MAP,
@@ -32,15 +33,20 @@ export default function XartisPage() {
   const [citiesGeo, setCitiesGeo] = useState<Record<string, any>>({});
   const [selected, setSelected] = useState<string | null>(null);
   const [eidikotitaFilter, setEidikotitaFilter] = useState("");
+  const [foreasFilter, setForeasFilter] = useState("");
   const [loading, setLoading] = useState(true);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Σύνδεσμος από τη σελίδα /foreis: /xartis?foreas=<φορέας>
+    const initialForeas = new URLSearchParams(window.location.search).get("foreas");
+
     Promise.all([
       fetch("/data/positions.json").then((r) => r.json()),
       fetch("/data/cities-geo.json").then((r) => r.json()),
     ])
       .then(([pos, cities]) => {
+        if (initialForeas) setForeasFilter(initialForeas);
         setPositions(pos);
         setCitiesGeo(cities);
       })
@@ -67,11 +73,33 @@ export default function XartisPage() {
       .sort((a, b) => a.label.localeCompare(b.label, "el"));
   }, [positions]);
 
-  // Θέσεις μετά το φίλτρο ειδικότητας — τροφοδοτούν και τον χάρτη και τη λίστα
+  // Προτάσεις για το πεδίο φορέα: οι κύριοι φορείς (π.χ. «ΔΗΜΟΣ ΘΕΣΣΑΛΟΝΙΚΗΣ»)
+  const foreasOptions = useMemo(
+    () =>
+      Array.from(new Set(positions.map((p) => mainForeas(p.foreas)))).sort((a, b) =>
+        a.localeCompare(b, "el")
+      ),
+    [positions]
+  );
+
+  // Θέσεις μετά τα φίλτρα ειδικότητας και φορέα — τροφοδοτούν τον χάρτη, το γράφημα και τη λίστα
   const filteredPositions = useMemo(() => {
-    if (!eidikotitaFilter) return positions;
-    return positions.filter((p) => specialtyLabel(p.eidikotita) === eidikotitaFilter);
-  }, [positions, eidikotitaFilter]);
+    const f = foreasFilter.trim();
+    if (!eidikotitaFilter && !f) return positions;
+    // Αν επιλέχθηκε ακριβές όνομα φορέα (από τη λίστα ή από σύνδεσμο του /foreis),
+    // δείξε μόνο αυτόν· αλλιώς ελεύθερη αναζήτηση στο όνομα.
+    const exact = foreasOptions.includes(f);
+    return positions.filter(
+      (p) =>
+        (!eidikotitaFilter || specialtyLabel(p.eidikotita) === eidikotitaFilter) &&
+        (exact ? mainForeas(p.foreas) === f : foreasMatches(p.foreas, f))
+    );
+  }, [positions, eidikotitaFilter, foreasFilter, foreasOptions]);
+
+  const anyFilter = !!(eidikotitaFilter || foreasFilter.trim());
+  const filterLabel = [eidikotitaFilter, foreasFilter.trim() && `Φορέας: ${foreasFilter.trim()}`]
+    .filter(Boolean)
+    .join(" · ");
 
   const filteredTheseis = useMemo(
     () => filteredPositions.reduce((sum, p) => sum + (p.theseis || 0), 0),
@@ -179,7 +207,7 @@ export default function XartisPage() {
             }}
           >
             Πάτησε σε μια περιφέρεια ή σε έναν κύκλο πόλης για να δεις τις θέσεις που προκηρύχθηκαν.
-            Μπορείς να φιλτράρεις και ανά ειδικότητα.
+            Μπορείς να φιλτράρεις και ανά ειδικότητα ή φορέα (π.χ. «Δήμος Θεσσαλονίκης»).
           </p>
         </motion.div>
 
@@ -231,13 +259,52 @@ export default function XartisPage() {
               </option>
             ))}
           </select>
-          {eidikotitaFilter && (
+          <label
+            htmlFor="foreas-filter"
+            style={{
+              fontSize: "0.75rem",
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+              color: "var(--text-muted)",
+            }}
+          >
+            Φορέας
+          </label>
+          <input
+            id="foreas-filter"
+            type="text"
+            list="foreas-options"
+            value={foreasFilter}
+            onChange={(e) => setForeasFilter(e.target.value)}
+            placeholder="π.χ. Δήμος Θεσσαλονίκης"
+            style={{
+              flex: "1 1 260px",
+              minWidth: 0,
+              maxWidth: "100%",
+              padding: "10px 12px",
+              borderRadius: "10px",
+              border: "1px solid var(--border)",
+              background: "var(--bg-elevated)",
+              color: "var(--text)",
+              fontSize: "0.9rem",
+              fontFamily: "inherit",
+            }}
+          />
+          <datalist id="foreas-options">
+            {foreasOptions.map((f) => (
+              <option key={f} value={f} />
+            ))}
+          </datalist>
+          {anyFilter && (
             <>
               <span style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>
                 {formatNumber(filteredPositions.length)} κωδικοί · {formatNumber(filteredTheseis)} θέσεις
               </span>
               <button
-                onClick={() => setEidikotitaFilter("")}
+                onClick={() => {
+                  setEidikotitaFilter("");
+                  setForeasFilter("");
+                }}
                 style={{
                   padding: "8px 14px",
                   borderRadius: "8px",
@@ -270,7 +337,7 @@ export default function XartisPage() {
         {/* Θέσεις ανά περιφέρεια — ακολουθεί το φίλτρο ειδικότητας */}
         <PositionsChart
           positions={filteredPositions}
-          eidikotita={eidikotitaFilter}
+          eidikotita={filterLabel}
           onSelect={handleSelect}
         />
 
@@ -317,9 +384,9 @@ export default function XartisPage() {
                       {formatNumber(selectedPositions.length)} κωδικοί θέσεων ·{" "}
                       {formatNumber(totalTheseis)} συνολικές θέσεις
                     </p>
-                    {eidikotitaFilter && (
+                    {anyFilter && (
                       <p style={{ color: "var(--primary-text)", fontSize: "0.85rem", marginTop: "4px" }}>
-                        Φίλτρο: {eidikotitaFilter}
+                        Φίλτρο: {filterLabel}
                       </p>
                     )}
                   </div>
@@ -448,7 +515,7 @@ export default function XartisPage() {
                       }}
                     >
                       ... και άλλοι {selectedPositions.length - 50} κωδικοί θέσεων
-                      {!eidikotitaFilter && " — διάλεξε ειδικότητα για να περιορίσεις τη λίστα"}
+                      {!anyFilter && " — διάλεξε ειδικότητα ή φορέα για να περιορίσεις τη λίστα"}
                     </div>
                   )}
 
